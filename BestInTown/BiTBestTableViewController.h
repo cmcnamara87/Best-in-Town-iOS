@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 
 @interface BiTBestTableViewController : UITableViewController
+@property (nonatomic, strong) NSArray *categories;
+@property (nonatomic, assign) BOOL isSubcategory;
 
 - (void)refreshCategories;
 @end

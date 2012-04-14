@@ -13,11 +13,12 @@
 
 @interface BiTBestTableViewController ()
 
-@property (nonatomic, strong) NSArray *categories;
+
 @end
 
 @implementation BiTBestTableViewController
 @synthesize categories = _categories;
+@synthesize isSubcategory = _isSubcategory;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -37,7 +38,9 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    [self refreshCategories];
+    if (!self.isSubcategory) {
+        [self refreshCategories];
+    }
 }
 
 - (void)viewDidUnload
@@ -105,6 +108,16 @@
     return cell;
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([[segue identifier] isEqualToString:@"Show Subcategory"]) {
+        [[segue destinationViewController] setIsSubcategory:YES];
+        NSInteger row = [self.tableView indexPathForCell:sender].row;
+        NSArray *subs = [[self.categories objectAtIndex:row] subcategories];
+        [[segue destinationViewController] setCategories:subs];
+    }
+}
+
 /*
 // Override to support conditional editing of the table view.
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
@@ -155,6 +168,11 @@
      // Pass the selected object to the new view controller.
      [self.navigationController pushViewController:detailViewController animated:YES];
      */
+    if (self.isSubcategory) {
+        [self performSegueWithIdentifier:@"Show List" sender:[self tableView:self.tableView cellForRowAtIndexPath:indexPath]];
+    } else {
+        [self performSegueWithIdentifier:@"Show Subcategory" sender:[self tableView:self.tableView cellForRowAtIndexPath:indexPath]];
+    }
 }
 
 @end
