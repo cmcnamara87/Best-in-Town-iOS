@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D01A064615394730007CEB3B /* BiTiPhoneStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D01A064515394730007CEB3B /* BiTiPhoneStoryboard.storyboard */; };
 		D07AEF12153934F2006E00D3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D07AEF11153934F2006E00D3 /* UIKit.framework */; };
 		D07AEF14153934F2006E00D3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D07AEF13153934F2006E00D3 /* Foundation.framework */; };
 		D07AEF16153934F2006E00D3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D07AEF15153934F2006E00D3 /* CoreGraphics.framework */; };
@@ -34,6 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		D01A064515394730007CEB3B /* BiTiPhoneStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = BiTiPhoneStoryboard.storyboard; sourceTree = "<group>"; };
 		D07AEF0D153934F2006E00D3 /* BestInTown.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BestInTown.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D07AEF11153934F2006E00D3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		D07AEF13153934F2006E00D3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -114,6 +116,7 @@
 		D07AEF19153934F2006E00D3 /* BestInTown */ = {
 			isa = PBXGroup;
 			children = (
+				D01A064515394730007CEB3B /* BiTiPhoneStoryboard.storyboard */,
 				D07AEF22153934F2006E00D3 /* BiTAppDelegate.h */,
 				D07AEF23153934F2006E00D3 /* BiTAppDelegate.m */,
 				D07AEF25153934F2006E00D3 /* BestInTown.xcdatamodeld */,
@@ -225,6 +228,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D07AEF1E153934F2006E00D3 /* InfoPlist.strings in Resources */,
+				D01A064615394730007CEB3B /* BiTiPhoneStoryboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -425,6 +429,7 @@
 				D07AEF42153934F2006E00D3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		D07AEF43153934F2006E00D3 /* Build configuration list for PBXNativeTarget "BestInTownTests" */ = {
 			isa = XCConfigurationList;
@@ -433,6 +438,7 @@
 				D07AEF45153934F2006E00D3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
