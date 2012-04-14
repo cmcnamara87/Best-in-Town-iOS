@@ -1,0 +1,453 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D07AEF12153934F2006E00D3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D07AEF11153934F2006E00D3 /* UIKit.framework */; };
+		D07AEF14153934F2006E00D3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D07AEF13153934F2006E00D3 /* Foundation.framework */; };
+		D07AEF16153934F2006E00D3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D07AEF15153934F2006E00D3 /* CoreGraphics.framework */; };
+		D07AEF18153934F2006E00D3 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D07AEF17153934F2006E00D3 /* CoreData.framework */; };
+		D07AEF1E153934F2006E00D3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D07AEF1C153934F2006E00D3 /* InfoPlist.strings */; };
+		D07AEF20153934F2006E00D3 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D07AEF1F153934F2006E00D3 /* main.m */; };
+		D07AEF24153934F2006E00D3 /* BiTAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = D07AEF23153934F2006E00D3 /* BiTAppDelegate.m */; };
+		D07AEF27153934F2006E00D3 /* BestInTown.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D07AEF25153934F2006E00D3 /* BestInTown.xcdatamodeld */; };
+		D07AEF2F153934F2006E00D3 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D07AEF2E153934F2006E00D3 /* SenTestingKit.framework */; };
+		D07AEF30153934F2006E00D3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D07AEF11153934F2006E00D3 /* UIKit.framework */; };
+		D07AEF31153934F2006E00D3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D07AEF13153934F2006E00D3 /* Foundation.framework */; };
+		D07AEF32153934F2006E00D3 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D07AEF17153934F2006E00D3 /* CoreData.framework */; };
+		D07AEF3A153934F2006E00D3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D07AEF38153934F2006E00D3 /* InfoPlist.strings */; };
+		D07AEF3D153934F2006E00D3 /* BestInTownTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D07AEF3C153934F2006E00D3 /* BestInTownTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D07AEF33153934F2006E00D3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D07AEF04153934F2006E00D3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D07AEF0C153934F2006E00D3;
+			remoteInfo = BestInTown;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		D07AEF0D153934F2006E00D3 /* BestInTown.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BestInTown.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D07AEF11153934F2006E00D3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		D07AEF13153934F2006E00D3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		D07AEF15153934F2006E00D3 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		D07AEF17153934F2006E00D3 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		D07AEF1B153934F2006E00D3 /* BestInTown-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BestInTown-Info.plist"; sourceTree = "<group>"; };
+		D07AEF1D153934F2006E00D3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D07AEF1F153934F2006E00D3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		D07AEF21153934F2006E00D3 /* BestInTown-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BestInTown-Prefix.pch"; sourceTree = "<group>"; };
+		D07AEF22153934F2006E00D3 /* BiTAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BiTAppDelegate.h; sourceTree = "<group>"; };
+		D07AEF23153934F2006E00D3 /* BiTAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BiTAppDelegate.m; sourceTree = "<group>"; };
+		D07AEF26153934F2006E00D3 /* BestInTown.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BestInTown.xcdatamodel; sourceTree = "<group>"; };
+		D07AEF2D153934F2006E00D3 /* BestInTownTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BestInTownTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D07AEF2E153934F2006E00D3 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		D07AEF37153934F2006E00D3 /* BestInTownTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BestInTownTests-Info.plist"; sourceTree = "<group>"; };
+		D07AEF39153934F2006E00D3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		D07AEF3B153934F2006E00D3 /* BestInTownTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BestInTownTests.h; sourceTree = "<group>"; };
+		D07AEF3C153934F2006E00D3 /* BestInTownTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BestInTownTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D07AEF0A153934F2006E00D3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D07AEF12153934F2006E00D3 /* UIKit.framework in Frameworks */,
+				D07AEF14153934F2006E00D3 /* Foundation.framework in Frameworks */,
+				D07AEF16153934F2006E00D3 /* CoreGraphics.framework in Frameworks */,
+				D07AEF18153934F2006E00D3 /* CoreData.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D07AEF29153934F2006E00D3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D07AEF2F153934F2006E00D3 /* SenTestingKit.framework in Frameworks */,
+				D07AEF30153934F2006E00D3 /* UIKit.framework in Frameworks */,
+				D07AEF31153934F2006E00D3 /* Foundation.framework in Frameworks */,
+				D07AEF32153934F2006E00D3 /* CoreData.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D07AEF02153934F2006E00D3 = {
+			isa = PBXGroup;
+			children = (
+				D07AEF19153934F2006E00D3 /* BestInTown */,
+				D07AEF35153934F2006E00D3 /* BestInTownTests */,
+				D07AEF10153934F2006E00D3 /* Frameworks */,
+				D07AEF0E153934F2006E00D3 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		D07AEF0E153934F2006E00D3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				D07AEF0D153934F2006E00D3 /* BestInTown.app */,
+				D07AEF2D153934F2006E00D3 /* BestInTownTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D07AEF10153934F2006E00D3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				D07AEF11153934F2006E00D3 /* UIKit.framework */,
+				D07AEF13153934F2006E00D3 /* Foundation.framework */,
+				D07AEF15153934F2006E00D3 /* CoreGraphics.framework */,
+				D07AEF17153934F2006E00D3 /* CoreData.framework */,
+				D07AEF2E153934F2006E00D3 /* SenTestingKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D07AEF19153934F2006E00D3 /* BestInTown */ = {
+			isa = PBXGroup;
+			children = (
+				D07AEF22153934F2006E00D3 /* BiTAppDelegate.h */,
+				D07AEF23153934F2006E00D3 /* BiTAppDelegate.m */,
+				D07AEF25153934F2006E00D3 /* BestInTown.xcdatamodeld */,
+				D07AEF1A153934F2006E00D3 /* Supporting Files */,
+			);
+			path = BestInTown;
+			sourceTree = "<group>";
+		};
+		D07AEF1A153934F2006E00D3 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D07AEF1B153934F2006E00D3 /* BestInTown-Info.plist */,
+				D07AEF1C153934F2006E00D3 /* InfoPlist.strings */,
+				D07AEF1F153934F2006E00D3 /* main.m */,
+				D07AEF21153934F2006E00D3 /* BestInTown-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		D07AEF35153934F2006E00D3 /* BestInTownTests */ = {
+			isa = PBXGroup;
+			children = (
+				D07AEF3B153934F2006E00D3 /* BestInTownTests.h */,
+				D07AEF3C153934F2006E00D3 /* BestInTownTests.m */,
+				D07AEF36153934F2006E00D3 /* Supporting Files */,
+			);
+			path = BestInTownTests;
+			sourceTree = "<group>";
+		};
+		D07AEF36153934F2006E00D3 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				D07AEF37153934F2006E00D3 /* BestInTownTests-Info.plist */,
+				D07AEF38153934F2006E00D3 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D07AEF0C153934F2006E00D3 /* BestInTown */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D07AEF40153934F2006E00D3 /* Build configuration list for PBXNativeTarget "BestInTown" */;
+			buildPhases = (
+				D07AEF09153934F2006E00D3 /* Sources */,
+				D07AEF0A153934F2006E00D3 /* Frameworks */,
+				D07AEF0B153934F2006E00D3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BestInTown;
+			productName = BestInTown;
+			productReference = D07AEF0D153934F2006E00D3 /* BestInTown.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D07AEF2C153934F2006E00D3 /* BestInTownTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D07AEF43153934F2006E00D3 /* Build configuration list for PBXNativeTarget "BestInTownTests" */;
+			buildPhases = (
+				D07AEF28153934F2006E00D3 /* Sources */,
+				D07AEF29153934F2006E00D3 /* Frameworks */,
+				D07AEF2A153934F2006E00D3 /* Resources */,
+				D07AEF2B153934F2006E00D3 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D07AEF34153934F2006E00D3 /* PBXTargetDependency */,
+			);
+			name = BestInTownTests;
+			productName = BestInTownTests;
+			productReference = D07AEF2D153934F2006E00D3 /* BestInTownTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D07AEF04153934F2006E00D3 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = BiT;
+				LastUpgradeCheck = 0430;
+				ORGANIZATIONNAME = "University of Queensland";
+			};
+			buildConfigurationList = D07AEF07153934F2006E00D3 /* Build configuration list for PBXProject "BestInTown" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = D07AEF02153934F2006E00D3;
+			productRefGroup = D07AEF0E153934F2006E00D3 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D07AEF0C153934F2006E00D3 /* BestInTown */,
+				D07AEF2C153934F2006E00D3 /* BestInTownTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D07AEF0B153934F2006E00D3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D07AEF1E153934F2006E00D3 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D07AEF2A153934F2006E00D3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D07AEF3A153934F2006E00D3 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		D07AEF2B153934F2006E00D3 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D07AEF09153934F2006E00D3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D07AEF20153934F2006E00D3 /* main.m in Sources */,
+				D07AEF24153934F2006E00D3 /* BiTAppDelegate.m in Sources */,
+				D07AEF27153934F2006E00D3 /* BestInTown.xcdatamodeld in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D07AEF28153934F2006E00D3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D07AEF3D153934F2006E00D3 /* BestInTownTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D07AEF34153934F2006E00D3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D07AEF0C153934F2006E00D3 /* BestInTown */;
+			targetProxy = D07AEF33153934F2006E00D3 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		D07AEF1C153934F2006E00D3 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D07AEF1D153934F2006E00D3 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		D07AEF38153934F2006E00D3 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				D07AEF39153934F2006E00D3 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		D07AEF3E153934F2006E00D3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D07AEF3F153934F2006E00D3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D07AEF41153934F2006E00D3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "BestInTown/BestInTown-Prefix.pch";
+				INFOPLIST_FILE = "BestInTown/BestInTown-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		D07AEF42153934F2006E00D3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "BestInTown/BestInTown-Prefix.pch";
+				INFOPLIST_FILE = "BestInTown/BestInTown-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		D07AEF44153934F2006E00D3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/BestInTown.app/BestInTown";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "BestInTown/BestInTown-Prefix.pch";
+				INFOPLIST_FILE = "BestInTownTests/BestInTownTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		D07AEF45153934F2006E00D3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/BestInTown.app/BestInTown";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "BestInTown/BestInTown-Prefix.pch";
+				INFOPLIST_FILE = "BestInTownTests/BestInTownTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D07AEF07153934F2006E00D3 /* Build configuration list for PBXProject "BestInTown" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D07AEF3E153934F2006E00D3 /* Debug */,
+				D07AEF3F153934F2006E00D3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D07AEF40153934F2006E00D3 /* Build configuration list for PBXNativeTarget "BestInTown" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D07AEF41153934F2006E00D3 /* Debug */,
+				D07AEF42153934F2006E00D3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		D07AEF43153934F2006E00D3 /* Build configuration list for PBXNativeTarget "BestInTownTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D07AEF44153934F2006E00D3 /* Debug */,
+				D07AEF45153934F2006E00D3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		D07AEF25153934F2006E00D3 /* BestInTown.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				D07AEF26153934F2006E00D3 /* BestInTown.xcdatamodel */,
+			);
+			currentVersion = D07AEF26153934F2006E00D3 /* BestInTown.xcdatamodel */;
+			path = BestInTown.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = D07AEF04153934F2006E00D3 /* Project object */;
+}
