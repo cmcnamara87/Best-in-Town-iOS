@@ -24,7 +24,11 @@
                          onSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success 
                            failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
-- (void)getBusinessDetailsForId:(NSString *)businessId 
-                      onSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success 
-                        failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+- (void)getExploreForCity:(NSString *)cityId 
+                    atLat:(double)lat 
+                      lon:(double)lon 
+                   radius:(int)radius 
+                onSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success 
+                  failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
 @end

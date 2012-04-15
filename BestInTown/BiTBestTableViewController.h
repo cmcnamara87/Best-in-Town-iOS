@@ -9,8 +9,12 @@
 #import <UIKit/UIKit.h>
 
 @interface BiTBestTableViewController : UITableViewController
+// Array of categories
 @property (nonatomic, strong) NSArray *categories;
+// Says if this tvc is showing a subcategory or not
 @property (nonatomic, assign) BOOL isSubcategory;
+// The name of the category (for sub-categories)
+@property (nonatomic, strong) NSString *categoryName;
 
 - (void)refreshCategories;
 @end

@@ -33,12 +33,19 @@
     return instance;
 }
 
+
+/**
+    Get all the categories
+ */
 - (void)getCategoriesOnSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success 
                        failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
     [httpClient getPath:@"/api/categories" parameters:nil success:success failure:failure];
 }
 
+/** 
+    Get the top ten list for a category and city
+ */
 - (void)getBusinessListForCategory:(NSString *)categoryId 
                             inCity:(NSString *)cityId
                          onSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success 
@@ -49,11 +56,24 @@
     [httpClient getPath:apiPath parameters:nil success:success failure:failure];
 }
 
-- (void)getBusinessDetailsForId:(NSString *)businessId 
-                      onSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success 
-                        failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+- (void)getExploreForCity:(NSString *)cityId 
+                    atLat:(double)lat 
+                      lon:(double)lon 
+                   radius:(int)radius 
+                onSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success 
+                  failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
     
+    NSString *apiPath = [NSString stringWithFormat:@"/api/explore/lat/%f/lon/%i/radius/%d/cityid/%@", lat, lon, radius, cityId];
+    NSLog(@"apiPath: http://bestintown.co%@", apiPath);
+    [httpClient getPath:apiPath parameters:nil success:success failure:failure];
+    
 }
+//- (void)getBusinessDetailsForId:(NSString *)businessId 
+//                      onSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success 
+//                        failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+//{
+//    
+//}
 
 @end

@@ -10,6 +10,7 @@
 #import "BiTApiController.h"
 #import "BiTCategory.h"
 #import "UIImageView+AFNetworking.h"
+#import "BiTListTableViewController.h"
 
 @interface BiTBestTableViewController ()
 @end
@@ -17,6 +18,7 @@
 @implementation BiTBestTableViewController
 @synthesize categories = _categories;
 @synthesize isSubcategory = _isSubcategory;
+@synthesize categoryName = _categoryName;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -38,7 +40,11 @@
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     if (!self.isSubcategory) {
         [self refreshCategories];
-    }
+    } 
+    
+    /*if(self.navigationItem.backBarButtonItem) {
+      self.navigationItem.backBarButtonItem.title = @"Best";  
+    }*/
 }
 
 - (void)viewDidUnload
@@ -53,12 +59,41 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+#pragma mark Segue
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    NSIndexPath *indexPath = (NSIndexPath *)sender;
+    NSInteger row = indexPath.row;
+    NSLog(@"Row selected: %d", row);
+    
+    // Get out the current category
+    BiTCategory *currentCategory = [self.categories objectAtIndex:row];
+    
+    if ([[segue identifier] isEqualToString:@"Show Subcategory"]) {
+        [[segue destinationViewController] setIsSubcategory:YES];
+        [[segue destinationViewController] setCategories:currentCategory.subcategories];
+        
+        NSLog(@"Setting destination name to be %@", currentCategory.categoryName);
+        [[segue destinationViewController] setCategoryName:currentCategory.categoryName];
+        
+    } else if ([[segue identifier] isEqualToString:@"Show List"]) {
+        // TODO: Add city id to loading controller
+        [[segue destinationViewController] setCategory:currentCategory];
+    }
+}
+
 #pragma mark Accessors
 - (void) setCategories:(NSArray *)categories {
     if(categories != _categories) {
         _categories = categories;
         [self.tableView reloadData];
         
+    }
+}
+- (void) setCategoryName:(NSString *)categoryName {
+    if(categoryName != _categoryName) {
+        _categoryName = categoryName;
+        self.title = categoryName;
     }
 }
 
@@ -100,28 +135,13 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     BiTCategory *cat = [self.categories objectAtIndex:indexPath.row];
-    cell.textLabel.text = cat.name;
+    cell.textLabel.text = cat.categoryName;
     // Configure the cell...
     
     return cell;
 }
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    NSIndexPath *indexPath = (NSIndexPath *)sender;
-    NSInteger row = indexPath.row;
-    NSLog(@"Row selected: %d", row);
-    
-    if ([[segue identifier] isEqualToString:@"Show Subcategory"]) {
-        [[segue destinationViewController] setIsSubcategory:YES];
-        NSArray *subs = [[self.categories objectAtIndex:row] subcategories];
-        [[segue destinationViewController] setCategories:subs];
-    } else if ([[segue identifier] isEqualToString:@"Show List"]) {
-        NSString *categoryId = [[self.categories objectAtIndex:row] categoryId];
-        // TODO: Add city id to loading controller
-        [[segue destinationViewController] setCategoryId:categoryId];
-    }
-}
+
 
 /*
 // Override to support conditional editing of the table view.

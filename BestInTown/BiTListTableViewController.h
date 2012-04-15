@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BiTCategory.h"
 
 @interface BiTListTableViewController : UITableViewController
-@property (nonatomic, strong) NSString *categoryId;
+@property (nonatomic, strong) BiTCategory *category;
 @property (nonatomic, strong) NSString *cityId;
 @end

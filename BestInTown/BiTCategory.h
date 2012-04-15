@@ -11,7 +11,7 @@
 @interface BiTCategory : NSObject
 @property (nonatomic, weak) BiTCategory *parentCategory;
 @property (nonatomic, copy) NSString *categoryId;
-@property (nonatomic, copy) NSString *name;
+@property (nonatomic, copy) NSString *categoryName;
 @property (nonatomic, copy) NSURL *imageUrl;
 @property (nonatomic, copy) NSArray *subcategories;
 

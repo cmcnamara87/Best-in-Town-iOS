@@ -11,7 +11,7 @@
 @implementation BiTCategory
 @synthesize parentCategory = _parentCategory;
 @synthesize categoryId = _categoryId;
-@synthesize name = _name;
+@synthesize categoryName = _name;
 @synthesize imageUrl = _imageUrl;
 @synthesize subcategories = _subcategories;
 
@@ -19,7 +19,7 @@
 {
     BiTCategory *topLevel = [[BiTCategory alloc] init];
     topLevel.categoryId = categoryId;
-    topLevel.name = [categoryData valueForKey:@"name"];
+    topLevel.categoryName = [categoryData valueForKey:@"name"];
     topLevel.imageUrl = [categoryData valueForKey:@"image_url"];
     
     if ([categoryData valueForKey:@"sub"]) {
@@ -29,7 +29,7 @@
             BiTCategory *subcategory = [[BiTCategory alloc] init];
             subcategory.categoryId = subCatId;
             subcategory.parentCategory = topLevel;
-            subcategory.name = [subs valueForKey:subCatId];
+            subcategory.categoryName = [subs valueForKey:subCatId];
             [subArray addObject:subcategory];
         }
         
