@@ -38,6 +38,9 @@
 		D07AEF32153934F2006E00D3 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D07AEF17153934F2006E00D3 /* CoreData.framework */; };
 		D07AEF3A153934F2006E00D3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D07AEF38153934F2006E00D3 /* InfoPlist.strings */; };
 		D07AEF3D153934F2006E00D3 /* BestInTownTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D07AEF3C153934F2006E00D3 /* BestInTownTests.m */; };
+		D0D1536E153A691200C0A913 /* BiTListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0D1536D153A691200C0A913 /* BiTListTableViewController.m */; };
+		D0D15371153A694B00C0A913 /* BiTBusinessDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0D15370153A694B00C0A913 /* BiTBusinessDetailViewController.m */; };
+		D0D15374153A71D400C0A913 /* BiTBusiness.m in Sources */ = {isa = PBXBuildFile; fileRef = D0D15373153A71D400C0A913 /* BiTBusiness.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,6 +104,12 @@
 		D07AEF39153934F2006E00D3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D07AEF3B153934F2006E00D3 /* BestInTownTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BestInTownTests.h; sourceTree = "<group>"; };
 		D07AEF3C153934F2006E00D3 /* BestInTownTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BestInTownTests.m; sourceTree = "<group>"; };
+		D0D1536C153A691200C0A913 /* BiTListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BiTListTableViewController.h; sourceTree = "<group>"; };
+		D0D1536D153A691200C0A913 /* BiTListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BiTListTableViewController.m; sourceTree = "<group>"; };
+		D0D1536F153A694B00C0A913 /* BiTBusinessDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BiTBusinessDetailViewController.h; sourceTree = "<group>"; };
+		D0D15370153A694B00C0A913 /* BiTBusinessDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BiTBusinessDetailViewController.m; sourceTree = "<group>"; };
+		D0D15372153A71D400C0A913 /* BiTBusiness.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BiTBusiness.h; sourceTree = "<group>"; };
+		D0D15373153A71D400C0A913 /* BiTBusiness.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BiTBusiness.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,6 +201,10 @@
 			children = (
 				D01A067A15395775007CEB3B /* BiTBestTableViewController.h */,
 				D01A067B15395775007CEB3B /* BiTBestTableViewController.m */,
+				D0D1536C153A691200C0A913 /* BiTListTableViewController.h */,
+				D0D1536D153A691200C0A913 /* BiTListTableViewController.m */,
+				D0D1536F153A694B00C0A913 /* BiTBusinessDetailViewController.h */,
+				D0D15370153A694B00C0A913 /* BiTBusinessDetailViewController.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -202,6 +215,8 @@
 				D07AEF25153934F2006E00D3 /* BestInTown.xcdatamodeld */,
 				D01A067E15395A98007CEB3B /* BiTCategory.h */,
 				D01A067F15395A98007CEB3B /* BiTCategory.m */,
+				D0D15372153A71D400C0A913 /* BiTBusiness.h */,
+				D0D15373153A71D400C0A913 /* BiTBusiness.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -409,6 +424,9 @@
 				D01A0677153956A5007CEB3B /* JSONKit.m in Sources */,
 				D01A067C15395775007CEB3B /* BiTBestTableViewController.m in Sources */,
 				D01A068015395A98007CEB3B /* BiTCategory.m in Sources */,
+				D0D1536E153A691200C0A913 /* BiTListTableViewController.m in Sources */,
+				D0D15371153A694B00C0A913 /* BiTBusinessDetailViewController.m in Sources */,
+				D0D15374153A71D400C0A913 /* BiTBusiness.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

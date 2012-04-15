@@ -1,22 +1,18 @@
 //
-//  BiTBestTableViewController.m
+//  BiTBusinessDetailViewController.m
 //  BestInTown
 //
-//  Created by Justin Marrington on 14/04/12.
+//  Created by Justin Marrington on 15/04/12.
 //  Copyright (c) 2012 University of Queensland. All rights reserved.
 //
 
-#import "BiTBestTableViewController.h"
-#import "BiTApiController.h"
-#import "BiTCategory.h"
-#import "UIImageView+AFNetworking.h"
+#import "BiTBusinessDetailViewController.h"
 
-@interface BiTBestTableViewController ()
+@interface BiTBusinessDetailViewController ()
+
 @end
 
-@implementation BiTBestTableViewController
-@synthesize categories = _categories;
-@synthesize isSubcategory = _isSubcategory;
+@implementation BiTBusinessDetailViewController
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -36,9 +32,6 @@
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    if (!self.isSubcategory) {
-        [self refreshCategories];
-    }
 }
 
 - (void)viewDidUnload
@@ -53,74 +46,30 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-#pragma mark Accessors
-- (void) setCategories:(NSArray *)categories {
-    if(categories != _categories) {
-        _categories = categories;
-        [self.tableView reloadData];
-        
-    }
-}
-
-#pragma mark Actions
-- (void)refreshCategories
-{
-    [[BiTApiController sharedApi] getCategoriesOnSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"Data:\n %@", responseObject);
-        NSMutableArray *categoriesArray = [NSMutableArray array];
-        for (NSString *categoryId in responseObject) {
-            NSDictionary *categoryData = [responseObject valueForKey:categoryId];
-            BiTCategory *category = [BiTCategory buildCategory:categoryId fromDict:categoryData];
-            [categoriesArray addObject:category];
-        }
-        
-        self.categories = [categoriesArray copy];
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Fuck it.");
-    }];
-}
-
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+#warning Potentially incomplete method implementation.
     // Return the number of sections.
-    return 1;
+    return 0;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+#warning Incomplete method implementation.
     // Return the number of rows in the section.
-    return [self.categories count];
+    return 0;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Category Cell";
+    static NSString *CellIdentifier = @"Cell";
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
-    BiTCategory *cat = [self.categories objectAtIndex:indexPath.row];
-    cell.textLabel.text = cat.name;
     // Configure the cell...
     
     return cell;
-}
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    NSIndexPath *indexPath = (NSIndexPath *)sender;
-    NSInteger row = indexPath.row;
-    NSLog(@"Row selected: %d", row);
-    
-    if ([[segue identifier] isEqualToString:@"Show Subcategory"]) {
-        [[segue destinationViewController] setIsSubcategory:YES];
-        NSArray *subs = [[self.categories objectAtIndex:row] subcategories];
-        [[segue destinationViewController] setCategories:subs];
-    } else if ([[segue identifier] isEqualToString:@"Show List"]) {
-        NSString *categoryId = [[self.categories objectAtIndex:row] categoryId];
-        // TODO: Add city id to loading controller
-        [[segue destinationViewController] setCategoryId:categoryId];
-    }
 }
 
 /*
@@ -166,11 +115,13 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (self.isSubcategory) {
-        [self performSegueWithIdentifier:@"Show List" sender:indexPath];
-    } else {
-        [self performSegueWithIdentifier:@"Show Subcategory" sender:indexPath];
-    }
+    // Navigation logic may go here. Create and push another view controller.
+    /*
+     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
+     // ...
+     // Pass the selected object to the new view controller.
+     [self.navigationController pushViewController:detailViewController animated:YES];
+     */
 }
 
 @end

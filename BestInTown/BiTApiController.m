@@ -33,9 +33,27 @@
     return instance;
 }
 
-- (void)getCategoriesOnSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+- (void)getCategoriesOnSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success 
+                       failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
 {
     [httpClient getPath:@"/api/categories" parameters:nil success:success failure:failure];
+}
+
+- (void)getBusinessListForCategory:(NSString *)categoryId 
+                            inCity:(NSString *)cityId
+                         onSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success 
+                           failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+{
+    NSString *apiPath = [NSString stringWithFormat:@"/api/topten/category/%@/cityid/%@", categoryId, cityId];
+    NSLog(@"apiPath: http://bestintown.co%@", apiPath);
+    [httpClient getPath:apiPath parameters:nil success:success failure:failure];
+}
+
+- (void)getBusinessDetailsForId:(NSString *)businessId 
+                      onSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success 
+                        failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+{
+    
 }
 
 @end
