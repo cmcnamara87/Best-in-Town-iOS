@@ -83,7 +83,7 @@
         case kContactSectionIndex:
             return 2;
         case kReviewSectionIndex:
-            return 1;
+            return 2;
         case kOpeningTimesSectionIndex:
             return 1;
         default:
@@ -111,6 +111,7 @@
 {
     static NSString *DetailCellIdentifier = @"Detail Cell";
     static NSString *ReviewCellIdentifier = @"Review Cell";
+    static NSString *MoreReviewsCellIdentifier = @"More Reviews Cell";
     static NSString *OpeningsCellIdentifier = @"Opening Cell";
     static NSString *RankCellIdentifier = @"Rank Cell";
     UITableViewCell *cell;
@@ -126,10 +127,14 @@
             cell.detailTextLabel.text = self.business.phone;
         }
     } else if (indexPath.section == kReviewSectionIndex) {
-        cell = [tableView dequeueReusableCellWithIdentifier:ReviewCellIdentifier];
-        cell.textLabel.text = self.business.reviewSnippet;
-        [cell.imageView setFrame:CGRectMake(10.0, 10.0, 24.0, 24.0)];
-        [cell.imageView setImageWithURL:self.business.reviewUserImageUrl];
+        if(indexPath.row == 0) {
+            cell = [tableView dequeueReusableCellWithIdentifier:ReviewCellIdentifier];
+            cell.textLabel.text = self.business.reviewSnippet;
+            /*[cell.imageView setFrame:CGRectMake(10.0, 10.0, 24.0, 24.0)];
+            [cell.imageView setImageWithURL:self.business.reviewUserImageUrl];*/
+        } else if(indexPath.row == 1) {
+            cell = [tableView dequeueReusableCellWithIdentifier:MoreReviewsCellIdentifier];
+        }
     } else if (indexPath.section == kOpeningTimesSectionIndex) {
         cell = [tableView dequeueReusableCellWithIdentifier:OpeningsCellIdentifier];
     } else if (indexPath.section == kCategoryRanksSectionIndex) {
@@ -140,6 +145,7 @@
     return cell;
 }
 
+#define defaultCellHeight 43.0
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString *labelText = @"";
@@ -150,9 +156,14 @@
             labelText = [self.business phone];
         }
     } else if (indexPath.section == kReviewSectionIndex) {
-        labelText = self.business.reviewSnippet;
+        if (indexPath.row == 0) {
+            labelText = self.business.reviewSnippet;
+        } else {
+            return defaultCellHeight;
+        }
+        
     } else {
-        return 43.0;
+        return defaultCellHeight;
     }
     
     return [self heightOfCellForLabelWithString:labelText andWidth:237.0];

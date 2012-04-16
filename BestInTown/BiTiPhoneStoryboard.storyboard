@@ -3,7 +3,7 @@
     <dependencies>
         <deployment defaultVersion="1296" identifier="iOS"/>
         <development defaultVersion="4200" identifier="xcode"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1181"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1179"/>
     </dependencies>
     <scenes>
         <!--Table View Controller - Explore-->
@@ -257,8 +257,29 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                             </tableViewCell>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="More Reviews Cell" textLabel="jYP-tm-sn8" style="IBUITableViewCellStyleDefault" id="upO-hQ-2E7">
+                                <rect key="frame" x="0.0" y="265" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                    <rect key="frame" x="10" y="0.0" width="280" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="More Reviews" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jYP-tm-sn8">
+                                            <rect key="frame" x="10" y="0.0" width="260" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                                <connections>
+                                    <segue destination="blp-SE-EeQ" kind="push" id="0fI-RE-YLB"/>
+                                </connections>
+                            </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Opening Cell" textLabel="IT4-63-ngm" style="IBUITableViewCellStyleDefault" id="HGO-VU-f3R">
-                                <rect key="frame" x="0.0" y="265" width="320" height="45"/>
+                                <rect key="frame" x="0.0" y="309" width="320" height="45"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="10" y="0.0" width="280" height="43"/>
@@ -274,6 +295,9 @@
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
+                                <connections>
+                                    <segue destination="blp-SE-EeQ" kind="push" id="QrF-me-RCh"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <sections/>
@@ -291,6 +315,28 @@
                 </tableViewController>
             </objects>
             <point key="canvasLocation" x="2502" y="-741"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="yBX-zm-nzW">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pjB-3V-Ddr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="blp-SE-EeQ" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="RHO-s1-Drb">
+                        <rect key="frame" x="0.0" y="64" width="320" height="367"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" id="I7t-U6-GgE">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="367"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Xrh-At-wGi"/>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="2949" y="-736"/>
         </scene>
         <!--Table View Controller-->
         <scene sceneID="01G-3p-psd">
@@ -554,5 +600,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="Rg3-co-P5Y"/>
         <segue reference="Owh-Nk-4vd"/>
+        <segue reference="QrF-me-RCh"/>
     </inferredMetricsTieBreakers>
 </document>
