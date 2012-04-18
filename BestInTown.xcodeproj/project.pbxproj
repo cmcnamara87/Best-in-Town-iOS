@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4E010CE7153EB0E700CBDC0C /* BiTYelpWebViewControllerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4E010CE6153EB0E700CBDC0C /* BiTYelpWebViewControllerViewController.m */; };
+		4EF1C769153E73030061E809 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 4EF1C766153E6DED0061E809 /* Default@2x.png */; };
+		4EF1C777153E77F80061E809 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4EF1C776153E77F80061E809 /* CoreLocation.framework */; };
+		4EF1C77A153E7D650061E809 /* BiTNearbyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4EF1C779153E7D650061E809 /* BiTNearbyViewController.m */; };
 		D01A064615394730007CEB3B /* BiTiPhoneStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D01A064515394730007CEB3B /* BiTiPhoneStoryboard.storyboard */; };
 		D01A065E15394DD7007CEB3B /* AFHTTPClient.m in Sources */ = {isa = PBXBuildFile; fileRef = D01A064A15394DD7007CEB3B /* AFHTTPClient.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		D01A065F15394DD7007CEB3B /* AFHTTPRequestOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = D01A064C15394DD7007CEB3B /* AFHTTPRequestOperation.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -54,6 +58,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4E010CE5153EB0E700CBDC0C /* BiTYelpWebViewControllerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BiTYelpWebViewControllerViewController.h; sourceTree = "<group>"; };
+		4E010CE6153EB0E700CBDC0C /* BiTYelpWebViewControllerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BiTYelpWebViewControllerViewController.m; sourceTree = "<group>"; };
+		4EF1C766153E6DED0061E809 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		4EF1C776153E77F80061E809 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		4EF1C778153E7D650061E809 /* BiTNearbyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BiTNearbyViewController.h; sourceTree = "<group>"; };
+		4EF1C779153E7D650061E809 /* BiTNearbyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BiTNearbyViewController.m; sourceTree = "<group>"; };
 		D01A064515394730007CEB3B /* BiTiPhoneStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = BiTiPhoneStoryboard.storyboard; sourceTree = "<group>"; };
 		D01A064915394DD7007CEB3B /* AFHTTPClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AFHTTPClient.h; sourceTree = "<group>"; };
 		D01A064A15394DD7007CEB3B /* AFHTTPClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AFHTTPClient.m; sourceTree = "<group>"; };
@@ -117,6 +127,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4EF1C777153E77F80061E809 /* CoreLocation.framework in Frameworks */,
 				D07AEF12153934F2006E00D3 /* UIKit.framework in Frameworks */,
 				D07AEF14153934F2006E00D3 /* Foundation.framework in Frameworks */,
 				D07AEF16153934F2006E00D3 /* CoreGraphics.framework in Frameworks */,
@@ -205,6 +216,10 @@
 				D0D1536D153A691200C0A913 /* BiTListTableViewController.m */,
 				D0D1536F153A694B00C0A913 /* BiTBusinessDetailViewController.h */,
 				D0D15370153A694B00C0A913 /* BiTBusinessDetailViewController.m */,
+				4E010CE5153EB0E700CBDC0C /* BiTYelpWebViewControllerViewController.h */,
+				4E010CE6153EB0E700CBDC0C /* BiTYelpWebViewControllerViewController.m */,
+				4EF1C778153E7D650061E809 /* BiTNearbyViewController.h */,
+				4EF1C779153E7D650061E809 /* BiTNearbyViewController.m */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -224,6 +239,8 @@
 		D07AEF02153934F2006E00D3 = {
 			isa = PBXGroup;
 			children = (
+				4EF1C776153E77F80061E809 /* CoreLocation.framework */,
+				4EF1C766153E6DED0061E809 /* Default@2x.png */,
 				D07AEF19153934F2006E00D3 /* BestInTown */,
 				D07AEF35153934F2006E00D3 /* BestInTownTests */,
 				D07AEF10153934F2006E00D3 /* Frameworks */,
@@ -260,8 +277,6 @@
 				D01A066815394DDF007CEB3B /* Libraries */,
 				D01A06791539574E007CEB3B /* View Controllers */,
 				D01A064515394730007CEB3B /* BiTiPhoneStoryboard.storyboard */,
-				D07AEF22153934F2006E00D3 /* BiTAppDelegate.h */,
-				D07AEF23153934F2006E00D3 /* BiTAppDelegate.m */,
 				D07AEF1A153934F2006E00D3 /* Supporting Files */,
 			);
 			path = BestInTown;
@@ -270,6 +285,8 @@
 		D07AEF1A153934F2006E00D3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				D07AEF22153934F2006E00D3 /* BiTAppDelegate.h */,
+				D07AEF23153934F2006E00D3 /* BiTAppDelegate.m */,
 				D07AEF1B153934F2006E00D3 /* BestInTown-Info.plist */,
 				D07AEF1C153934F2006E00D3 /* InfoPlist.strings */,
 				D07AEF1F153934F2006E00D3 /* main.m */,
@@ -373,6 +390,7 @@
 				D01A064615394730007CEB3B /* BiTiPhoneStoryboard.storyboard in Resources */,
 				D01A0676153956A5007CEB3B /* CHANGELOG.md in Resources */,
 				D01A0678153956A5007CEB3B /* README.md in Resources */,
+				4EF1C769153E73030061E809 /* Default@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -427,6 +445,8 @@
 				D0D1536E153A691200C0A913 /* BiTListTableViewController.m in Sources */,
 				D0D15371153A694B00C0A913 /* BiTBusinessDetailViewController.m in Sources */,
 				D0D15374153A71D400C0A913 /* BiTBusiness.m in Sources */,
+				4EF1C77A153E7D650061E809 /* BiTNearbyViewController.m in Sources */,
+				4E010CE7153EB0E700CBDC0C /* BiTYelpWebViewControllerViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

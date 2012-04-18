@@ -27,4 +27,11 @@
 + (BiTBusiness *)buildBusinessfromDict:(NSDictionary *)businessData;
 - (NSString *)addressString;
 
++ (void)exploreForCity:(NSString *)cityId 
+                 atLat:(double)lat 
+                   lon:(double)lon 
+                radius:(int)radius 
+             onSuccess:(void (^)(NSString *address, NSArray *businesses))success 
+               failure:(void (^)(NSError *error))failure;
+
 @end

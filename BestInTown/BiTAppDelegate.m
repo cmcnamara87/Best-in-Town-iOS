@@ -15,14 +15,17 @@
 @synthesize managedObjectModel = __managedObjectModel;
 @synthesize persistentStoreCoordinator = __persistentStoreCoordinator;
 
-//- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-//{
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+{
 //    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 //    // Override point for customization after application launch.
 //    self.window.backgroundColor = [UIColor whiteColor];
 //    [self.window makeKeyAndVisible];
-//    return YES;
-//}
+
+    [[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:162/255.0 green:0/255.0 blue:16/255.0 alpha:1.0]];
+
+    return YES;
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {

@@ -6,24 +6,43 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="1179"/>
     </dependencies>
     <scenes>
-        <!--Table View Controller - Explore-->
+        <!--BiT Nearby View Controller - Nearby-->
         <scene sceneID="BpE-Gc-0Dm">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6H8-ax-OVp" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tableViewController id="POv-AP-RZd" sceneMemberID="viewController">
+                <tableViewController id="POv-AP-RZd" customClass="BiTNearbyViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="ghI-bA-PfC">
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="eZc-Rh-TC6">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Business Cell" textLabel="fdl-vT-Tcy" detailTextLabel="1ua-cR-thU" style="IBUITableViewCellStyleSubtitle" id="eZc-Rh-TC6">
                                 <rect key="frame" x="0.0" y="22" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="300" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fdl-vT-Tcy">
+                                            <rect key="frame" x="10" y="2" width="38" height="22"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </label>
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="1ua-cR-thU">
+                                            <rect key="frame" x="10" y="24" width="47" height="18"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                        </label>
+                                    </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
+                                <connections>
+                                    <segue destination="jyo-bL-QSa" kind="push" identifier="Show Business" id="mhB-h0-85H"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -31,7 +50,7 @@
                             <outlet property="delegate" destination="POv-AP-RZd" id="7IG-Ok-ePg"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Explore" id="mSS-d7-YAH"/>
+                    <navigationItem key="navigationItem" title="Nearby" id="mSS-d7-YAH"/>
                 </tableViewController>
             </objects>
             <point key="canvasLocation" x="1369" y="-1366"/>
@@ -71,12 +90,13 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="The Best in Town" id="R1E-Wx-aRa">
-                        <barButtonItem key="rightBarButtonItem" title="Explore" id="t3d-C3-6vQ">
+                        <barButtonItem key="rightBarButtonItem" title="Nearby" id="t3d-C3-6vQ">
                             <connections>
-                                <segue destination="POv-AP-RZd" kind="push" identifier="Show Explore" id="WNO-Bk-ju8"/>
+                                <segue destination="POv-AP-RZd" kind="push" identifier="Show Nearby" id="UCR-mw-RNr"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackTranslucent"/>
                     <connections>
                         <segue destination="IuG-QD-m93" kind="push" identifier="Show Subcategory" id="Dww-jk-X20"/>
                         <segue destination="5lE-Dw-EXu" kind="push" identifier="Show List" id="aat-jN-Mww"/>
@@ -120,7 +140,7 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Sub-Category" id="d1u-HS-c08">
-                        <barButtonItem key="rightBarButtonItem" title="Explore" id="69L-Bs-a0H">
+                        <barButtonItem key="rightBarButtonItem" title="Nearby" id="69L-Bs-a0H">
                             <connections>
                                 <segue destination="POv-AP-RZd" kind="push" identifier="Show Explore" id="Owh-Nk-4vd"/>
                             </connections>
@@ -142,9 +162,35 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="NbU-zz-fsE">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" id="H0r-CF-frK">
+                                    <rect key="frame" x="20" y="15" width="233" height="14"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <view contentMode="scaleToFill" id="710-wY-O7c">
+                                            <rect key="frame" x="0.0" y="0.0" width="180" height="14"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <color key="backgroundColor" red="0.64385190217391308" green="0.053002055367415112" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        </view>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </view>
+                                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="7/10" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" id="ypq-GG-LBG">
+                                    <rect key="frame" x="256" y="12" width="44" height="21"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        </view>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Business Cell" textLabel="g6G-3M-P52" detailTextLabel="AQq-Q9-Owz" style="IBUITableViewCellStyleSubtitle" id="yiV-uN-azJ">
-                                <rect key="frame" x="0.0" y="22" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="66" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="300" height="43"/>
@@ -275,7 +321,7 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <connections>
-                                    <segue destination="blp-SE-EeQ" kind="push" id="0fI-RE-YLB"/>
+                                    <segue destination="blp-SE-EeQ" kind="push" identifier="Show Yelp Mobile" id="0fI-RE-YLB"/>
                                 </connections>
                             </tableViewCell>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Opening Cell" textLabel="IT4-63-ngm" style="IBUITableViewCellStyleDefault" id="HGO-VU-f3R">
@@ -296,7 +342,7 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <connections>
-                                    <segue destination="blp-SE-EeQ" kind="push" id="QrF-me-RCh"/>
+                                    <segue destination="blp-SE-EeQ" kind="push" identifier="Show Yelp Mobile" id="QrF-me-RCh"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -316,11 +362,11 @@
             </objects>
             <point key="canvasLocation" x="2502" y="-741"/>
         </scene>
-        <!--View Controller-->
+        <!--BiT Yelp Web View Controller View Controller-->
         <scene sceneID="yBX-zm-nzW">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pjB-3V-Ddr" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController id="blp-SE-EeQ" sceneMemberID="viewController">
+                <viewController id="blp-SE-EeQ" customClass="BiTYelpWebViewControllerViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="RHO-s1-Drb">
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -334,6 +380,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="Xrh-At-wGi"/>
+                    <connections>
+                        <outlet property="webView" destination="I7t-U6-GgE" id="p8e-sg-WgB"/>
+                    </connections>
                 </viewController>
             </objects>
             <point key="canvasLocation" x="2949" y="-736"/>
@@ -463,6 +512,7 @@
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mK7-HI-Eas" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tabBarController definesPresentationContext="YES" id="fNj-q5-XEu" sceneMemberID="viewController">
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackTranslucent"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="NNh-xA-OP2">
                         <rect key="frame" x="129" y="330" width="163" height="49"/>
@@ -487,6 +537,7 @@
                 <navigationController id="NaS-Sv-v4p" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="The Best" id="BmO-JS-eSC"/>
                     <toolbarItems/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics" statusBarStyle="blackTranslucent"/>
                     <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="tQ2-cJ-gmf">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -518,12 +569,12 @@
             </objects>
             <point key="canvasLocation" x="595" y="-168"/>
         </scene>
-        <!--Navigation Controller - Rate-->
+        <!--Navigation Controller - Rank-->
         <scene sceneID="hxw-ah-e3U">
             <objects>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RDD-Dh-HfD" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="Iek-SU-Y4H" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Rate" id="AiB-g9-ixn"/>
+                    <tabBarItem key="tabBarItem" title="Rank" id="AiB-g9-ixn"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="c1t-ON-Eti">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -591,6 +642,15 @@
         <class className="BiTListTableViewController" superclassName="UITableViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/BiTListTableViewController.h"/>
         </class>
+        <class className="BiTNearbyViewController" superclassName="UITableViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/BiTNearbyViewController.h"/>
+        </class>
+        <class className="BiTYelpWebViewControllerViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/BiTYelpWebViewControllerViewController.h"/>
+            <relationships>
+                <relationship kind="outlet" name="webView" candidateClass="UIWebView"/>
+            </relationships>
+        </class>
     </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
@@ -598,8 +658,9 @@
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Rg3-co-P5Y"/>
-        <segue reference="Owh-Nk-4vd"/>
+        <segue reference="UCR-mw-RNr"/>
+        <segue reference="aat-jN-Mww"/>
+        <segue reference="B73-Nb-ZYg"/>
         <segue reference="QrF-me-RCh"/>
     </inferredMetricsTieBreakers>
 </document>

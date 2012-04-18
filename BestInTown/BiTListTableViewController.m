@@ -11,7 +11,7 @@
 #import "BiTBusiness.h"
 #import "BiTBusinessDetailViewController.h"
 
-@interface BiTListTableViewController ()
+@interface BiTListTableViewController () 
 
 @property (nonatomic, strong) NSArray *businesses;
 @end

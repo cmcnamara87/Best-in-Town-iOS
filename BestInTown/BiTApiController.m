@@ -33,6 +33,13 @@
     return instance;
 }
 
+- (void)getPath:(NSString *)path 
+     parameters:(NSDictionary *)parameters
+      OnSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success 
+        failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+    
+    [httpClient getPath:path parameters:parameters success:success failure:failure];
+}
 
 /**
     Get all the categories
@@ -56,19 +63,6 @@
     [httpClient getPath:apiPath parameters:nil success:success failure:failure];
 }
 
-- (void)getExploreForCity:(NSString *)cityId 
-                    atLat:(double)lat 
-                      lon:(double)lon 
-                   radius:(int)radius 
-                onSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success 
-                  failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
-{
-    
-    NSString *apiPath = [NSString stringWithFormat:@"/api/explore/lat/%f/lon/%i/radius/%d/cityid/%@", lat, lon, radius, cityId];
-    NSLog(@"apiPath: http://bestintown.co%@", apiPath);
-    [httpClient getPath:apiPath parameters:nil success:success failure:failure];
-    
-}
 //- (void)getBusinessDetailsForId:(NSString *)businessId 
 //                      onSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success 
 //                        failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure

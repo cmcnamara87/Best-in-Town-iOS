@@ -8,6 +8,7 @@
 
 #import "BiTBusinessDetailViewController.h"
 #import "UIImageView+AFNetworking.h"
+#import "BiTYelpWebViewControllerViewController.h"
 
 @interface BiTBusinessDetailViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *businessPhoto;
@@ -65,6 +66,12 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if([segue.identifier isEqualToString:@"Show Yelp Mobile"]) {
+        [[segue destinationViewController] setYelpMobileURL:self.business.yelpMobileUrl];
+    }
 }
 
 #pragma mark - Table view data source
@@ -145,7 +152,7 @@
     return cell;
 }
 
-#define defaultCellHeight 43.0
+#define kDefaultCellHeight 43.0
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString *labelText = @"";
@@ -153,17 +160,17 @@
         if (indexPath.row == 0) {
             labelText = [self.business addressString];
         } else {
-            labelText = [self.business phone];
+            return kDefaultCellHeight;
         }
     } else if (indexPath.section == kReviewSectionIndex) {
         if (indexPath.row == 0) {
             labelText = self.business.reviewSnippet;
         } else {
-            return defaultCellHeight;
+            return kDefaultCellHeight;
         }
         
     } else {
-        return defaultCellHeight;
+        return kDefaultCellHeight;
     }
     
     return [self heightOfCellForLabelWithString:labelText andWidth:237.0];

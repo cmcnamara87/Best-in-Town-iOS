@@ -7,6 +7,7 @@
 //
 
 #import "BiTBusiness.h"
+#import "BiTApiController.h"
 
 @implementation BiTBusiness
 @synthesize businessId;
@@ -32,6 +33,35 @@
         
     }
     return formattedAddressString;
+}
+
++ (void)exploreForCity:(NSString *)cityId 
+                    atLat:(double)lat 
+                      lon:(double)lon 
+                   radius:(int)radius 
+                onSuccess:(void (^)(NSString *address, NSArray *businesses))success 
+                  failure:(void (^)(NSError *error))failure
+{
+
+    NSString *apiPath = [NSString stringWithFormat:@"/api/nearby/lat/%f/lon/%f/radius/%d/cityid/%@", lat, lon, radius, cityId];
+    
+    [[BiTApiController sharedApi] getPath:apiPath parameters:nil OnSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        // Get out the address
+        NSString *address = [responseObject valueForKey:@"address"];
+        
+        // Get out the businesses
+        NSMutableArray *businessesArray = [NSMutableArray array];
+        for(NSDictionary *businessData in [responseObject valueForKey:@"businesses"]) {
+            BiTBusiness *business = [BiTBusiness buildBusinessfromDict:businessData];
+            [businessesArray addObject:business];
+        }
+        success(address, [businessesArray copy]);
+        
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        
+        failure(error);        
+    }];
 }
 
 + (BiTBusiness *)buildBusinessfromDict:(NSDictionary *)businessData

@@ -24,11 +24,10 @@
                          onSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success 
                            failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
-- (void)getExploreForCity:(NSString *)cityId 
-                    atLat:(double)lat 
-                      lon:(double)lon 
-                   radius:(int)radius 
-                onSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success 
-                  failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
+- (void)getPath:(NSString *)path 
+     parameters:(NSDictionary *)parameters
+      OnSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success 
+        failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
 @end

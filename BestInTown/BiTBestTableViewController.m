@@ -11,8 +11,9 @@
 #import "BiTCategory.h"
 #import "UIImageView+AFNetworking.h"
 #import "BiTListTableViewController.h"
+#import <CoreLocation/CoreLocation.h>
 
-@interface BiTBestTableViewController ()
+@interface BiTBestTableViewController () <CLLocationManagerDelegate>
 @end
 
 @implementation BiTBestTableViewController
@@ -33,25 +34,14 @@
 {
     [super viewDidLoad];
 
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     if (!self.isSubcategory) {
         [self refreshCategories];
-    } 
-    
-    /*if(self.navigationItem.backBarButtonItem) {
-      self.navigationItem.backBarButtonItem.title = @"Best";  
-    }*/
+    }
 }
 
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-    // Release any retained subviews of the main view.
-    // e.g. self.myOutlet = nil;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -61,15 +51,16 @@
 
 #pragma mark Segue
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    NSIndexPath *indexPath = (NSIndexPath *)sender;
-    NSInteger row = indexPath.row;
-    NSLog(@"Row selected: %d", row);
-    
-    // Get out the current category
-    BiTCategory *currentCategory = [self.categories objectAtIndex:row];
-    
+{    
     if ([[segue identifier] isEqualToString:@"Show Subcategory"]) {
+        
+        NSIndexPath *indexPath = (NSIndexPath *)sender;
+        NSInteger row = indexPath.row;
+        NSLog(@"Row selected: %d", row);
+        
+        // Get out the current category
+        BiTCategory *currentCategory = [self.categories objectAtIndex:row];
+        
         [[segue destinationViewController] setIsSubcategory:YES];
         [[segue destinationViewController] setCategories:currentCategory.subcategories];
         
@@ -77,6 +68,14 @@
         [[segue destinationViewController] setCategoryName:currentCategory.categoryName];
         
     } else if ([[segue identifier] isEqualToString:@"Show List"]) {
+        
+        NSIndexPath *indexPath = (NSIndexPath *)sender;
+        NSInteger row = indexPath.row;
+        NSLog(@"Row selected: %d", row);
+        
+        // Get out the current category
+        BiTCategory *currentCategory = [self.categories objectAtIndex:row];
+        
         // TODO: Add city id to loading controller
         [[segue destinationViewController] setCategory:currentCategory];
     }
@@ -112,7 +111,7 @@
         self.categories = [categoriesArray copy];
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Fuck it.");
-    }];
+    }];    
 }
 
 #pragma mark - Table view data source
