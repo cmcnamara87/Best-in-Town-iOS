@@ -1,0 +1,79 @@
+GOOGLE PLACES
+https://maps.googleapis.com/maps/api/place/search/json?location=-33.8670522,151.1957362&radius=500&types=food&name=harbour&sensor=false&key=AIzaSyBc5jA_BpNXAgoIoCcwPePAB_j39ZEGawA
+
+
+https://maps.googleapis.com/maps/api/place/search/json?location=-27.496105,153.00207&rankby=distance&name=mcdonalds&sensor=false&key=AIzaSyBc5jA_BpNXAgoIoCcwPePAB_j39ZEGawA
+
+https://maps.googleapis.com/maps/api/place/details/json?reference=CoQBdwAAABH2b8vfEvIktzN6BJA6nmmZOHTyzsQvfg5Tjd04XdHLqLAIKVqyYP5SVuN-19iaE1-nYbdI2Ku0BjQ3gVsF39bSPzEpNS9tCSP1GnntCi4d5Fe8HbOW4sK9nNZk9w_tzBOjWGZEOIU-8_wDj_vbweo3LW0yqPsXA21TInlRaBFYEhDXENpTyi5rKlQDZtCPL8loGhRfZljAku187oxBoz1Yix9VF8QRuw&sensor=true&key=AIzaSyBc5jA_BpNXAgoIoCcwPePAB_j39ZEGawA
+
+https://maps.googleapis.com/maps/api/place/details/json?reference=CmRgAAAAJ7pE_fo15Fud6bJqxk3pX3Nauesfgy9SHBxsw8ygjHpuu4v1Ei_bV0o61mopgM-7PDZaN8_gricbbfJ58VtaMygjPDqOqKa4OuD5kUQOIhe8RSq5Jl8NwN4k641xUnHEEhDVtiNGGIJDVWb1yCfYWTj-GhS7bRB5I0FOHxZ1qyPaJaLlwAP9yQ&sensor=true&key=AIzaSyBc5jA_BpNXAgoIoCcwPePAB_j39ZEGawA
+
+
+// AUTOCOMPLETE SEARCH (business)
+https://maps.googleapis.com/maps/api/place/autocomplete/json?input=Na&types=establishment&location=-27.496105,153.00207&radius=500&sensor=true&key=AIzaSyBc5jA_BpNXAgoIoCcwPePAB_j39ZEGawA
+
+// Locality Search
+// Doesnt fucking work.
+https://maps.googleapis.com/maps/api/place/search/json?location=-27.496105,153.00207&radius=50000&keyword=St%20Lucia&types=locality&sensor=false&key=AIzaSyBc5jA_BpNXAgoIoCcwPePAB_j39ZEGawA
+
+// Geocoding
+
+
+-27.496105, 153.00207
+
+// LA QUINTA
+https://graph.facebook.com/search?q=la%20quinta&type=place&center=-27.496105,153.00207&distance=10000&access_token=AAAAAAITEghMBAM9YFm0cEtw3Wi7IQBS5ismgDXHdCtZCwZBhpysEdDGFMWUmchzXn3xstHItevDMMOlcgCWjZAsictLNeXsD5xdIdDE8QZDZD
+
+https://maps.googleapis.com/maps/api/place/search/json?location=-27.496105,153.00207&rankby=distance&name=la%20quinta&sensor=false&key=AIzaSyBc5jA_BpNXAgoIoCcwPePAB_j39ZEGawA
+
+
+
+https://graph.facebook.com/search?q=la%20quinta&type=place&center=-27.4516790,153.060940&distance=100&access_token=AAAAAAITEghMBAM9YFm0cEtw3Wi7IQBS5ismgDXHdCtZCwZBhpysEdDGFMWUmchzXn3xstHItevDMMOlcgCWjZAsictLNeXsD5xdIdDE8QZDZD
+
+
+{
+   "html_attributions" : [],
+   "result" : {
+      "address_components" : [
+         {
+            "long_name" : "DARLING HARBOUR",
+            "short_name" : "DARLING HARBOUR",
+            "types" : [ "locality", "political" ]
+         },
+         {
+            "long_name" : "NSW",
+            "short_name" : "NSW",
+            "types" : [ "administrative_area_level_1", "political" ]
+         },
+         {
+            "long_name" : "AU",
+            "short_name" : "AU",
+            "types" : [ "country", "political" ]
+         },
+         {
+            "long_name" : "2000",
+            "short_name" : "2000",
+            "types" : [ "postal_code" ]
+         }
+      ],
+      "formatted_address" : "Shop 461, 2-10 Darling Drive, Harbourside Shopping Centre, DARLING HARBOUR NSW, Australia",
+      "formatted_phone_number" : "1300 274 648",
+      "geometry" : {
+         "location" : {
+            "lat" : -33.8721970,
+            "lng" : 151.1987820
+         }
+      },
+      "icon" : "http://maps.gstatic.com/mapfiles/place_api/icons/restaurant-71.png",
+      "id" : "27ea39c8fed1c0437069066b8dccf958a2d06f19",
+      "international_phone_number" : "+61 1300 274 648",
+      "name" : "Criniti's Darling Harbour",
+      "rating" : 3.10,
+      "reference" : "CoQBdwAAAJff31jQF5kM1LE2FGbQdmTK-3UXTkusc4bqn-qYUPMGjYpqRquPR68u7bucFDpZjBaQtGjJBLqr1zwY2FlBJTMwvWMW4d0TCv5BfiRvx-KbeHKMSq23TKUWnsEgBgdXAoGlSyz3Yh5lrU4W0MzuZM2MbBLtP-G6dR5pQwbJ-aE-EhCEHq2XZoiyzOlRcJ3gvDTSGhRDWQsNvqckH5zJlXDtQg2rwhNsYA",
+      "types" : [ "restaurant", "food", "establishment" ],
+      "url" : "http://maps.google.com/maps/place?cid=1454858144247110990",
+      "vicinity" : "Shop 461, 2-10 Darling Drive, Harbourside Shopping Centre, DARLING HARBOUR",
+      "website" : "http://www.crinitis.com.au/"
+   },
+   "status" : "OK"
+}

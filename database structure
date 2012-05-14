@@ -1,0 +1,104 @@
+Login:
+craigmcn_bestintown
+craigmcn_best
+-+dbdyC??tTc
+
+craigmcn
+mhb@sz7xlcm#
+
+Player A Score: 1400
+Player B Score: 1500
+
+Ea = 1/ (1 + 10^((1500 - 1400)/400)))
+Ea = 1/ (1 + 10^(0.25))
+Ea = 1/ (1 + 1.77827941003892)
+Ea = 1 / 2.77827941003892
+Ea = 0.3599
+Eb = 1/ (1 + 10^((1400 - 1500)/400)))
+Eb = 1/1.56234132519035
+Eb = 0.64006499980288
+
+Ranew = Raold + K*(Sa - Ea)
+Ranew = 1400 + 25*(1 - 0.3599)
+Ranew = 1400 + 16
+Ranew = 1416
+
+Rbnew = 1500 + 25(0.36);
+Rbnew = 1492;
+
+Sa - 0 for 1, 1 for win
+K (25 for the first 30 games?, LoL uses 60 for first then levels out around 25)
+
+
+business
+	- id
+	- yelpId
+	- cityId
+	- lat
+	- lon
+	- data (json data dump from some source? yelp, google places, facebook etc)
+	
+city
+	- id
+	- isoCity
+	- latitude
+	- longitude
+	
+category
+	- id
+	- yelpId
+	- name
+	- image
+	
+businessCategory
+	- id
+	- businessID
+	- categoryID
+	- eloScore (maybe, if unique ratings are per category combo)
+	
+user
+	- id
+	- fbId (facebook id)
+	- name
+	- email
+	- profilePicUrl
+	- score
+
+userOverallLevel
+	- minScore
+	- levelNumber
+	
+facebookFriends
+	- fbID
+	- fbID
+	
+userCategoryLevel
+	- userID
+	- categoryID
+	- categoryLevelNumber
+
+categoryLevel
+	- categoryLevelNumber
+	- kValue (used in elo algorithm to determine influence)
+
+
+userVisitHistory
+	- userID
+	- businessID
+	- date
+	- (could be other stuff in here so we can reply rating history)
+	
+
+
+/* just a possibility */
+achievements
+	- id
+	- name
+	- imageUrl
+	
+userAchievements
+	- userID	
+	- achievementID
+	- date
+	
+	

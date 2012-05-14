@@ -7,9 +7,16 @@
 //
 
 #import "BiTAppDelegate.h"
+#import "BiTUser.h"
+#import "BiTStartupViewController.h"
+
+
+#define kApiId @"293808417373673"
+
 
 @implementation BiTAppDelegate
 
+@synthesize facebook = _facebook;
 @synthesize window = _window;
 @synthesize managedObjectContext = __managedObjectContext;
 @synthesize managedObjectModel = __managedObjectModel;
@@ -22,8 +29,14 @@
 //    self.window.backgroundColor = [UIColor whiteColor];
 //    [self.window makeKeyAndVisible];
 
-    [[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:162/255.0 green:0/255.0 blue:16/255.0 alpha:1.0]];
+    [[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:80/255.0 green:200/255.0 blue:16/255.0 alpha:1.0]];
+    
+    [application setStatusBarStyle:UIStatusBarStyleBlackOpaque];  
+    
+    self.facebook = [[Facebook alloc] initWithAppId:kApiId andDelegate:self];
 
+    
+    NSLog(@"Did finish launching");
     return YES;
 }
 
@@ -68,6 +81,19 @@
         } 
     }
 }
+
+#pragma mark - Facebook SSO stuff
+// Pre iOS 4.2 support
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+    return [self.facebook handleOpenURL:url]; 
+}
+
+// For iOS 4.2+ support
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    return [self.facebook handleOpenURL:url]; 
+}
+
 
 #pragma mark - Core Data stack
 

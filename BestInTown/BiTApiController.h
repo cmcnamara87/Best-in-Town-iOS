@@ -8,7 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-#define kApiBase @"http://bestintown.co/"
+#define kApiBase @"http://192.168.0.20:8888/"
+#define kApiBaseUni @"http://10.0.2.35:8888/"
 #define kBrisbaneCityId @"1213";
 
 @class AFHTTPRequestOperation;
@@ -29,5 +30,10 @@
      parameters:(NSDictionary *)parameters
       OnSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success 
         failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
+- (void)postPath:(NSString *)path 
+      parameters:(NSDictionary *)parameters 
+       OnSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success 
+         failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
 @end

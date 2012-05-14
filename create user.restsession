@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>contentType</key>
+	<string>application/x-www-form-urlencoded</string>
+	<key>httpHeaders</key>
+	<data>
+	YnBsaXN0MDDUAQIDBAUGCAlYJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3AS
+	AAGGoKEHVSRudWxsXxAPTlNLZXllZEFyY2hpdmVy0QoLVHJvb3SAAAgRGiMtMjc5P1FU
+	WQAAAAAAAAEBAAAAAAAAAAwAAAAAAAAAAAAAAAAAAABb
+	</data>
+	<key>httpMethod</key>
+	<string>GET</string>
+	<key>password</key>
+	<string></string>
+	<key>requestText</key>
+	<string>fb_id=568582614&amp;first_name=Craig&amp;last_name= McNamara&amp;oauth_access_token=BAAELN5pZAfekBAPArIoZAcmspmDCfhGZCIvMOfEbkNZAcPIVURmZAb9OVelQhZBtnxcXxLsJ1rpq19OrBZAotdrFGlcbBm5CcwOhWpaCkfJvjJs5kuEvWbKbSRPilszAGdJd51x3ebQ9gZDZD&amp;oauth_expiry=2012-07-10 12:22:41 +0000</string>
+	<key>url</key>
+	<string>http://localhost:8888/index.php/api/user</string>
+	<key>username</key>
+	<string></string>
+</dict>
+</plist>

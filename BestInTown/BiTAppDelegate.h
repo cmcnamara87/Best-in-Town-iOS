@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FBConnect.h"
 
 @interface BiTAppDelegate : UIResponder <UIApplicationDelegate>
+
+@property (nonatomic, strong) Facebook *facebook;
 
 @property (strong, nonatomic) UIWindow *window;
 

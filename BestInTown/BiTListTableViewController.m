@@ -10,6 +10,7 @@
 #import "BiTApiController.h"
 #import "BiTBusiness.h"
 #import "BiTBusinessDetailViewController.h"
+#import "BiTLocationManager.h"
 
 @interface BiTListTableViewController () 
 
@@ -47,23 +48,18 @@
         self.cityId = kBrisbaneCityId;
     }
     
-    // Download the business list
-    [[BiTApiController sharedApi] getBusinessListForCategory:self.category.categoryId inCity:self.cityId onSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"Got these businesses:\n%@", [responseObject valueForKey:@"businesses"]);
+    [[BiTLocationManager locationManager] locationOnSuccess:^(int cityId, CLLocation *location) {
+        // Get the best businesses for the category
+        [BiTBusiness getBestBusinessesForCategory:self.category.categoryId inCity:cityId onSuccess:^(NSArray *businesses) {
+            self.businesses = businesses;
+        } failure:^(NSError *error) {
+            NSLog(@"Fucked up Business List %@", error);
+        }];
+    } failure:^{
         
-        // Convert data to an array of business objects
-        NSMutableArray *businessesArray = [NSMutableArray array];
-        for(NSDictionary *businessData in [responseObject valueForKey:@"businesses"]) {
-            BiTBusiness *business = [BiTBusiness buildBusinessfromDict:businessData];
-            [businessesArray addObject:business];
-        }
-        
-        self.businesses = [businessesArray copy];
-        
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        // TODO: Add actual error handling to the UI
-        NSLog(@"We fucked the API call for business lists");
     }];
+    
+    
 }
 
 - (void)viewDidUnload
@@ -109,7 +105,7 @@
     // Configure the cell...
     BiTBusiness *currentBusiness = [self.businesses objectAtIndex:indexPath.row];
     cell.textLabel.text = [NSString stringWithFormat:@"%i. %@", (indexPath.row + 1), currentBusiness.businessName];
-    cell.detailTextLabel.text = currentBusiness.city;
+    cell.detailTextLabel.text = currentBusiness.locality;
     return cell;
 }
 

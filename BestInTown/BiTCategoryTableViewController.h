@@ -7,14 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BiTCategory.h"
 
-@interface BiTBestTableViewController : UITableViewController
+@interface BiTCategoryTableViewController : UITableViewController
 // Array of categories
 @property (nonatomic, strong) NSArray *categories;
 // Says if this tvc is showing a subcategory or not
 @property (nonatomic, assign) BOOL isSubcategory;
-// The name of the category (for sub-categories)
-@property (nonatomic, strong) NSString *categoryName;
+// The current category (nil for top level, next is like, 'food' etc)
+@property (nonatomic, strong) BiTCategory *category;
 
 - (void)refreshCategories;
 @end

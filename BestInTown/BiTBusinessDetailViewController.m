@@ -7,13 +7,16 @@
 //
 
 #import "BiTBusinessDetailViewController.h"
+#import "BiTCategory.h"
 #import "UIImageView+AFNetworking.h"
 #import "BiTYelpWebViewControllerViewController.h"
+#import "BiTTodo.h"
 
 @interface BiTBusinessDetailViewController ()
 @property (weak, nonatomic) IBOutlet UIImageView *businessPhoto;
 @property (weak, nonatomic) IBOutlet UILabel *businessNameLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *yelpRatingImage;
+@property (weak, nonatomic) IBOutlet UIButton *todoButton;
 
 @end
 
@@ -21,6 +24,7 @@
 @synthesize businessPhoto = _businessPhoto;
 @synthesize businessNameLabel = _businessNameLabel;
 @synthesize yelpRatingImage = _yelpRatingImage;
+@synthesize todoButton = _todoButton;
 @synthesize business = _business;
 
 - (void)setBusiness:(BiTBusiness *)business {
@@ -58,6 +62,7 @@
     [self setBusinessPhoto:nil];
     [self setYelpRatingImage:nil];
     [self setBusinessNameLabel:nil];
+    [self setTodoButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -70,9 +75,23 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if([segue.identifier isEqualToString:@"Show Yelp Mobile"]) {
-        [[segue destinationViewController] setYelpMobileURL:self.business.yelpMobileUrl];
+        
     }
 }
+
+#pragma mark Actions
+- (IBAction)addTodoButtonTouched:(id)sender {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    int userId = [(NSNumber *)[defaults objectForKey:@"userId"] intValue]; 
+    
+    [BiTTodo addTodoForBusiness:self.business.businessId user:userId onSuccess:^(BiTTodo *visit) {
+        NSLog(@"Todo Added");
+    } failure:^(NSError *error) {
+        NSLog(@"Todo Failed %@", error);        
+    }];
+}
+
 
 #pragma mark - Table view data source
 
@@ -93,6 +112,8 @@
             return 2;
         case kOpeningTimesSectionIndex:
             return 1;
+        case kCategoryRanksSectionIndex:
+            return [self.business.categories count];
         default:
             return 0;
     }
@@ -128,7 +149,7 @@
         
         if (indexPath.row == 0) {
             cell.textLabel.text = @"Address";
-            cell.detailTextLabel.text = [self.business addressString];
+            cell.detailTextLabel.text = self.business.address;
         } else {
             cell.textLabel.text = @"Phone";
             cell.detailTextLabel.text = self.business.phone;
@@ -136,7 +157,7 @@
     } else if (indexPath.section == kReviewSectionIndex) {
         if(indexPath.row == 0) {
             cell = [tableView dequeueReusableCellWithIdentifier:ReviewCellIdentifier];
-            cell.textLabel.text = self.business.reviewSnippet;
+//            cell.textLabel.text = self.business.reviewSnippet;
             /*[cell.imageView setFrame:CGRectMake(10.0, 10.0, 24.0, 24.0)];
             [cell.imageView setImageWithURL:self.business.reviewUserImageUrl];*/
         } else if(indexPath.row == 1) {
@@ -145,10 +166,12 @@
     } else if (indexPath.section == kOpeningTimesSectionIndex) {
         cell = [tableView dequeueReusableCellWithIdentifier:OpeningsCellIdentifier];
     } else if (indexPath.section == kCategoryRanksSectionIndex) {
+        cell = [tableView dequeueReusableCellWithIdentifier:RankCellIdentifier];
         
+        BiTCategory *category = [self.business.categories objectAtIndex:indexPath.row];
+        cell.textLabel.text =  [NSString stringWithFormat:@"#%d", category.rank];
+        cell.detailTextLabel.text = category.categoryName;
     }
-    // Configure the cell...
-    
     return cell;
 }
 
@@ -158,13 +181,13 @@
     NSString *labelText = @"";
     if (indexPath.section == kContactSectionIndex) {
         if (indexPath.row == 0) {
-            labelText = [self.business addressString];
+//            labelText = [self.business addressString];
         } else {
             return kDefaultCellHeight;
         }
     } else if (indexPath.section == kReviewSectionIndex) {
         if (indexPath.row == 0) {
-            labelText = self.business.reviewSnippet;
+//            labelText = self.business.reviewSnippet;
         } else {
             return kDefaultCellHeight;
         }

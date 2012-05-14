@@ -7,7 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "BiTCategory.h"
 @interface BiTNearbyViewController : UITableViewController
-
+// Best businesses nearby
+@property (nonatomic, strong) NSArray* businesses;
+@property (nonatomic, strong) BiTCategory *category;
 @end

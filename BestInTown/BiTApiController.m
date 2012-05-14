@@ -25,6 +25,7 @@
     if (!instance) {
         // Make sure we have a AFHttpClient before anybody tries to use the API.
         instance = [[BiTApiController alloc] init];
+//        instance.httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:kApiBase]];
         instance.httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:kApiBase]];
         [instance.httpClient registerHTTPOperationClass:[AFJSONRequestOperation class]];
         [instance.httpClient setDefaultHeader:@"Accept" value:@"application/json"];
@@ -36,9 +37,22 @@
 - (void)getPath:(NSString *)path 
      parameters:(NSDictionary *)parameters
       OnSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success 
-        failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+        failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure 
+{
     
+    NSLog(@"URL %@", path);
+    NSLog(@"Params: %@", parameters);
     [httpClient getPath:path parameters:parameters success:success failure:failure];
+}
+
+- (void)postPath:(NSString *)path 
+      parameters:(NSDictionary *)parameters 
+       OnSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success 
+         failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
+{
+    NSLog(@"URL %@", path);
+    NSLog(@"Params: %@", parameters);
+    [httpClient postPath:path parameters:parameters success:success failure:failure];
 }
 
 /**
@@ -62,12 +76,5 @@
     NSLog(@"apiPath: http://bestintown.co%@", apiPath);
     [httpClient getPath:apiPath parameters:nil success:success failure:failure];
 }
-
-//- (void)getBusinessDetailsForId:(NSString *)businessId 
-//                      onSuccess:(void (^)(AFHTTPRequestOperation *operation, id responseObject))success 
-//                        failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure
-//{
-//    
-//}
 
 @end

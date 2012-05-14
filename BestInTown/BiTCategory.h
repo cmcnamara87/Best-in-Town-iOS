@@ -10,10 +10,19 @@
 
 @interface BiTCategory : NSObject
 @property (nonatomic, weak) BiTCategory *parentCategory;
-@property (nonatomic, copy) NSString *categoryId;
+@property (nonatomic, assign) int categoryId;
+@property (nonatomic, assign) int parentId;
 @property (nonatomic, copy) NSString *categoryName;
 @property (nonatomic, copy) NSURL *imageUrl;
 @property (nonatomic, copy) NSArray *subcategories;
+@property (nonatomic, assign) int eloScore;
+@property (nonatomic, assign) int rank;
 
-+ (BiTCategory *)buildCategory:(NSString *)categoryId fromDict:(NSDictionary *)categoryData;
++ (BiTCategory *)buildCategoryFromDict:(NSDictionary *)categoryData;
++ (void)getCategoriesOnSuccess:(void (^)(NSArray *categories))success 
+                       failure:(void (^)(NSError *error))failure;
++ (void)addBusiness:(int)businessId 
+         toCategory:(int)categoryId 
+          onSuccess:(void (^)())success 
+            failure:(void (^)(NSError *error))failure;
 @end
