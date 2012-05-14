@@ -26,7 +26,7 @@
         // Make sure we have a AFHttpClient before anybody tries to use the API.
         instance = [[BiTApiController alloc] init];
 //        instance.httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:kApiBase]];
-        instance.httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:kApiBase]];
+        instance.httpClient = [[AFHTTPClient alloc] initWithBaseURL:[NSURL URLWithString:kApiBaseUni]];
         [instance.httpClient registerHTTPOperationClass:[AFJSONRequestOperation class]];
         [instance.httpClient setDefaultHeader:@"Accept" value:@"application/json"];
     }

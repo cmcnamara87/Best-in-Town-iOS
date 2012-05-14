@@ -78,6 +78,7 @@
 		D07AEF32153934F2006E00D3 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D07AEF17153934F2006E00D3 /* CoreData.framework */; };
 		D07AEF3A153934F2006E00D3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D07AEF38153934F2006E00D3 /* InfoPlist.strings */; };
 		D07AEF3D153934F2006E00D3 /* BestInTownTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D07AEF3C153934F2006E00D3 /* BestInTownTests.m */; };
+		D0C5AC7F15611E7400D0798C /* BiTDebugTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0C5AC7E15611E7400D0798C /* BiTDebugTableViewController.m */; };
 		D0D1536E153A691200C0A913 /* BiTListTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0D1536D153A691200C0A913 /* BiTListTableViewController.m */; };
 		D0D15371153A694B00C0A913 /* BiTBusinessDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D0D15370153A694B00C0A913 /* BiTBusinessDetailViewController.m */; };
 		D0D15374153A71D400C0A913 /* BiTBusiness.m in Sources */ = {isa = PBXBuildFile; fileRef = D0D15373153A71D400C0A913 /* BiTBusiness.m */; };
@@ -215,6 +216,8 @@
 		D07AEF39153934F2006E00D3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		D07AEF3B153934F2006E00D3 /* BestInTownTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BestInTownTests.h; sourceTree = "<group>"; };
 		D07AEF3C153934F2006E00D3 /* BestInTownTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BestInTownTests.m; sourceTree = "<group>"; };
+		D0C5AC7D15611E7400D0798C /* BiTDebugTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BiTDebugTableViewController.h; path = ../BiTDebugTableViewController.h; sourceTree = "<group>"; };
+		D0C5AC7E15611E7400D0798C /* BiTDebugTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BiTDebugTableViewController.m; path = ../BiTDebugTableViewController.m; sourceTree = "<group>"; };
 		D0D1536C153A691200C0A913 /* BiTListTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BiTListTableViewController.h; sourceTree = "<group>"; };
 		D0D1536D153A691200C0A913 /* BiTListTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BiTListTableViewController.m; sourceTree = "<group>"; };
 		D0D1536F153A694B00C0A913 /* BiTBusinessDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BiTBusinessDetailViewController.h; sourceTree = "<group>"; };
@@ -361,6 +364,8 @@
 		D01A06791539574E007CEB3B /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				D0C5AC7D15611E7400D0798C /* BiTDebugTableViewController.h */,
+				D0C5AC7E15611E7400D0798C /* BiTDebugTableViewController.m */,
 				D01A067A15395775007CEB3B /* BiTCategoryTableViewController.h */,
 				D01A067B15395775007CEB3B /* BiTCategoryTableViewController.m */,
 				D0D1536C153A691200C0A913 /* BiTListTableViewController.h */,
@@ -665,6 +670,7 @@
 				4E5D14971560A31E00FAF383 /* BiTLocationManager.m in Sources */,
 				4EFC994B1560AEA1000CD847 /* BiTCity.m in Sources */,
 				4EFC994F1560AF1B000CD847 /* BiTCountry.m in Sources */,
+				D0C5AC7F15611E7400D0798C /* BiTDebugTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

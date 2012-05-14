@@ -25,7 +25,7 @@
         success([BiTCity buildCityfromDict:responseObject]);
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Failed to get a city");
+        NSLog(@"Failed to get a city, %@", error);
         failure(error);        
     }];
 }

@@ -24,13 +24,21 @@
 {
     [[BiTApiController sharedApi] getPath:@"index.php/api/categories" parameters:nil OnSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
 
+        success([BiTCategory buildCategoriesFromData:responseObject]);
         
-        NSMutableArray *categories = [NSMutableArray array];
-        for(NSDictionary *categoryData in responseObject) {
-            BiTCategory *category = [BiTCategory buildCategoryFromDict:categoryData];
-            [categories addObject:category];
-        }
-        success([categories copy]);
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+        NSLog(@"Failed to get categories");
+        failure(error);
+    }];
+}
+
++ (void)getLeafCategoriesOnSuccess:(void (^)(NSArray *categories))success 
+                           failure:(void (^)(NSError *error))failure 
+{
+ 
+    [[BiTApiController sharedApi] getPath:@"index.php/api/categories_leaf" parameters:nil OnSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
+        
+        success([BiTCategory buildCategoriesFromData:responseObject]);
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Failed to get categories");

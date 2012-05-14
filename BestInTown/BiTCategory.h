@@ -25,4 +25,8 @@
          toCategory:(int)categoryId 
           onSuccess:(void (^)())success 
             failure:(void (^)(NSError *error))failure;
+
++ (void)getLeafCategoriesOnSuccess:(void (^)(NSArray *categories))success 
+                           failure:(void (^)(NSError *error))failure;
+
 @end

@@ -7,13 +7,15 @@
 //
 
 #import "BiTLocationManager.h"
+#import "BiTAppDelegate.h"
 #import "BiTCity.h"
 @interface BiTLocationManager () <CLLocationManagerDelegate>
 @property (nonatomic, strong) CLLocationManager *cllocationManager;
+@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @end
 
 @implementation BiTLocationManager
-@synthesize cllocationManager;
+@synthesize cllocationManager, managedObjectContext;
 
 + (BiTLocationManager *)locationManager
 {
@@ -24,6 +26,8 @@
         instance.cllocationManager = [[CLLocationManager alloc] init];
         instance.cllocationManager.delegate = instance;
         [instance.cllocationManager startMonitoringSignificantLocationChanges];
+        
+        instance.managedObjectContext = [(BiTAppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext];
     }
     return instance;
 }
@@ -56,6 +60,8 @@
                 [defaults setObject:[NSNumber numberWithDouble:city.minCoordinate.coordinate.latitude] forKey:@"cityMinLat"];
                 [defaults setObject:[NSNumber numberWithDouble:city.minCoordinate.coordinate.longitude] forKey:@"cityMinLon"];
                 
+                [defaults synchronize];
+                
                 success(city.cityId, cllocationManager.location);
             } failure:^(NSError *error) {
                 failure();
@@ -70,6 +76,16 @@
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation
 {
     NSLog(@"Location changed %@", newLocation);
+    NSEntityDescription *locEntity = [NSEntityDescription insertNewObjectForEntityForName:@"Location" inManagedObjectContext:self.managedObjectContext];
+    [locEntity setValue:[NSNumber numberWithDouble:newLocation.coordinate.latitude] forKey:@"latitude"];
+    [locEntity setValue:[NSNumber numberWithDouble:newLocation.coordinate.longitude] forKey:@"longitude"];
+    [locEntity setValue:[NSDate date] forKey:@"timestamp"];
+    
+    NSError *error;
+    if (![self.managedObjectContext save:&error]) {
+        // handle errors
+        NSLog(@"Location write error: %@", error);
+    }
 }
 
 - (void)locationManager:(CLLocationManager *)manager

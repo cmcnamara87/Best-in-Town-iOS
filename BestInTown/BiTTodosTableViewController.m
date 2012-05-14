@@ -31,18 +31,22 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    locationManager = [[CLLocationManager alloc] init];
-    
-    NSLog(@"Current locaiton is %@", locationManager.location.coordinate);
 
+    
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
  
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
-    int userId = [(NSNumber *)[[NSUserDefaults standardUserDefaults] objectForKey:@"userId"] intValue];
 
+
+    
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    int userId = [(NSNumber *)[[NSUserDefaults standardUserDefaults] objectForKey:@"userId"] intValue];
+    
     [BiTTodo getTodosForUser:userId onSuccess:^(NSArray *todos) {
         self.todos = todos;
     } failure:^(NSError *error) {

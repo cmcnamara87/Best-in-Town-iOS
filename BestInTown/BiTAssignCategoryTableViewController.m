@@ -64,7 +64,7 @@
 #pragma mark Actions
 - (void)refreshCategories
 {
-    [BiTCategory getCategoriesOnSuccess:^(NSArray *categories) {
+    [BiTCategory getLeafCategoriesOnSuccess:^(NSArray *categories) {
         self.categories = categories;
     } failure:^(NSError *error) {
         NSLog(@"Categories are fucked %@", error);

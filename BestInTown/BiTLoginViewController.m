@@ -82,14 +82,17 @@
  */
 - (void)request:(FBRequest *)request didLoad:(id)result
 {
+    NSLog(@"Got facebook response");
     if([request.url isEqualToString:@"https://graph.facebook.com/me"]) {
         // Save the user
+        NSLog(@"Got graph/me response");
         [BiTUser addUserFromFBDict:result withAccessToken:self.facebook.accessToken andExpiry:self.facebook.expirationDate onSuccess:^(BiTUser *user) {
            
             NSLog(@"Made a new user, saving the ID in user defaults");
             NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
             [defaults setObject:[NSNumber numberWithInt:user.userId] forKey:@"userId"];
             
+            [defaults synchronize];
             
             // Close the login prompt
             [self performSegueWithIdentifier:@"Show App" sender:self];
@@ -102,6 +105,8 @@
         // TODO: get back a user object
         
         
+    } else {
+        NSLog(@"Unknown facebook response type");
     }
 }
 
@@ -117,7 +122,9 @@
     NSLog(@"Facebook did login");
     
     // Close the login prompt
-    [self performSegueWithIdentifier:@"Show App" sender:self];
+    
+    [self.facebook requestWithGraphPath:@"me" andDelegate:self];
+//    [self performSegueWithIdentifier:@"Show App" sender:self];
 //    [self dismissModalViewControllerAnimated:YES];
 }
 
