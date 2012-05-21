@@ -156,7 +156,7 @@
     }
     
     BiTCategory *cat = [self.categories objectAtIndex:index];
-    catCell.categoryLabel.text = cat.categoryName`;
+    catCell.categoryLabel.text = cat.categoryName;
     
     return catCell;
 }
