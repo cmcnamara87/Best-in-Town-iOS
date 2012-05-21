@@ -10,6 +10,7 @@
 
 #define kApiBase @"http://192.168.0.20:8888/"
 #define kApiBaseUni @"http://10.0.2.35:8888/"
+#define kApiBaseOnline @"http://bestintown.co/v2/"
 #define kBrisbaneCityId @"1213";
 
 @class AFHTTPRequestOperation;

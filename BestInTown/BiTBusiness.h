@@ -7,13 +7,15 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreLocation/CoreLocation.h>
 
 @interface BiTBusiness : NSObject
 @property (nonatomic, assign) int businessId;
 @property (nonatomic, strong) NSString *businessName;
 @property (nonatomic, assign) int cityId;
-@property (nonatomic, assign) double lat;
-@property (nonatomic, assign) double lon;
+//@property (nonatomic, assign) double lat;
+//@property (nonatomic, assign) double lon;
+@property (nonatomic, strong) CLLocation *location;
 @property (nonatomic, strong) NSString *modified;
 @property (nonatomic, strong) NSString *phone;
 @property (nonatomic, strong) NSString *address;
@@ -32,6 +34,10 @@
 
 //+ (BiTBusiness *)buildBusinessfromDict:(NSDictionary *)businessData;
 
++ (void)addBusiness:(int)businessId 
+         toCategory:(int)categoryId 
+          onSuccess:(void (^)(BiTBusiness *business))success 
+            failure:(void (^)(NSError *error))failure;
 
 + (void)getBestBusinessesForCategory:(int)categoryId 
                               inCity:(int)cityId

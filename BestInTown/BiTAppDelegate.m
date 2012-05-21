@@ -29,12 +29,45 @@
 //    self.window.backgroundColor = [UIColor whiteColor];
 //    [self.window makeKeyAndVisible];
 
-    [[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:80/255.0 green:200/255.0 blue:16/255.0 alpha:1.0]];
+//    [[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:139/255.0 green:182/255.0 blue:112/255.0 alpha:1.0]];
+    
+//    [[UINavigationBar appearance] setTintColor:[UIColor colorWithRed:0/255.0 green:0/255.0 blue:0/255.0 alpha:1.0]];
+    
+    [[UINavigationBar appearance] setBackgroundImage:[UIImage imageNamed:@"navbar_pink.png"] forBarMetrics:UIBarMetricsDefault];
+    
+//     [[UILabel appearanceWhenContainedIn:[UINavigationBar class], nil] setFont:[UIFont fontWithName:@"Intro" size:21.0]];
+    
+    
+    [[UINavigationBar appearance] setTitleTextAttributes:
+     
+     [NSDictionary dictionaryWithObjectsAndKeys:
+      
+      [UIColor whiteColor], UITextAttributeTextColor, 
+      
+      [UIColor clearColor], UITextAttributeTextShadowColor, 
+      
+      [NSValue valueWithUIOffset:UIOffsetMake(0, 0)], UITextAttributeTextShadowOffset, 
+      
+      [UIFont fontWithName:@"Intro" size:22], UITextAttributeFont, 
+      
+      nil]];
+    
+    
+    // make the nav bar bigger?
+    CGRect navframe = [[UINavigationBar appearance] frame];
+    navframe.size.height = 100;
+    [[UINavigationBar appearance] setFrame:navframe];
     
     [application setStatusBarStyle:UIStatusBarStyleBlackOpaque];  
     
     self.facebook = [[Facebook alloc] initWithAppId:kApiId andDelegate:self];
 
+    [TestFlight takeOff:@"ca8038bd0dae34fcd62eb3b4a67cd595_OTAwNjcyMDEyLTA1LTE3IDA5OjAxOjUxLjkzODcyNA"];
+    
+#define TESTING 1
+#ifdef TESTING
+    [TestFlight setDeviceIdentifier:[[UIDevice currentDevice] uniqueIdentifier]];
+#endif
     
     NSLog(@"Did finish launching");
     return YES;
@@ -174,6 +207,56 @@
 - (NSURL *)applicationDocumentsDirectory
 {
     return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
+}
+
+#pragma mark - Facebook Session Delegate (only used till the startup takes it)
+/**
+ * Called when the user successfully logged in.
+ */
+- (void)fbDidLogi
+{
+    
+}
+
+/**
+ * Called when the user dismissed the dialog without logging in.
+ */
+- (void)fbDidNotLogin:(BOOL)cancelled
+{
+    
+}
+
+/**
+ * Called after the access token was extended. If your application has any
+ * references to the previous access token (for example, if your application
+ * stores the previous access token in persistent storage), your application
+ * should overwrite the old access token with the new one in this method.
+ * See extendAccessToken for more details.
+ */
+- (void)fbDidExtendToken:(NSString*)accessToken
+               expiresAt:(NSDate*)expiresAt
+{
+    
+}
+
+/**
+ * Called when the user logged out.
+ */
+- (void)fbDidLogout
+{
+    
+}
+
+/**
+ * Called when the current session has expired. This might happen when:
+ *  - the access token expired
+ *  - the app has been disabled
+ *  - the user revoked the app's permissions
+ *  - the user changed his or her password
+ */
+- (void)fbSessionInvalidated
+{
+    
 }
 
 @end

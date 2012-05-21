@@ -1,5 +1,5 @@
 GOOGLE PLACES
-https://maps.googleapis.com/maps/api/place/search/json?location=-33.8670522,151.1957362&radius=500&types=food&name=harbour&sensor=false&key=AIzaSyBc5jA_BpNXAgoIoCcwPePAB_j39ZEGawA
+https://maps.googleapis.com/maps/api/place/search/json?location=-18.1416,178.4419&radius=50000&types=establishment&name=traps&sensor=false&key=AIzaSyBc5jA_BpNXAgoIoCcwPePAB_j39ZEGawA
 
 
 https://maps.googleapis.com/maps/api/place/search/json?location=-27.496105,153.00207&rankby=distance&name=mcdonalds&sensor=false&key=AIzaSyBc5jA_BpNXAgoIoCcwPePAB_j39ZEGawA

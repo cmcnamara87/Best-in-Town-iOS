@@ -7,6 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "BiTBusiness.h"
+#import "BiTVisit.h"
 
 @interface BiTMatch : NSObject
 
@@ -15,4 +17,10 @@
                           forVisit:(int)visitId
                          onSuccess:(void (^)())success 
                            failure:(void (^)(NSError *error))failure;
+
++ (void)addRankingResult:(NSArray *)businesses 
+           forBusinesses:(BiTBusiness *)business 
+                forVisit:(BiTVisit *)visit
+               onSuccess:(void (^)())success 
+                 failure:(void (^)(NSError *error))failure;
 @end

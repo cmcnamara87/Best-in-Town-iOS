@@ -9,34 +9,25 @@
 #import "BiTRateSelectorTableViewController.h"
 #import "BiTBusiness.h"
 #import "BiTAssignCategoryTableViewController.h"
+#import "BiTLocationManager.h"
+#import "BiTNearbyBusinessCell.h"
+#import "BiTCategory.h"
 #import <CoreLocation/CoreLocation.h>
 
-@interface BiTRateSelectorTableViewController () <CLLocationManagerDelegate>
-@property (nonatomic, strong) CLLocationManager *locationManager;
+@interface BiTRateSelectorTableViewController () <BiTAssignCategoryTableViewControllerDelegate>
 @property (nonatomic, strong) NSArray *businesses;
 @property (nonatomic, strong) NSString *address;
+@property (weak, nonatomic) IBOutlet UILabel *addressLabel;
+@property (nonatomic, strong) CLLocation *lastGotLocation;
 @end
 
 @implementation BiTRateSelectorTableViewController
-@synthesize locationManager;
+@synthesize lastGotLocation;
 @synthesize businesses = _businesses;
 @synthesize address = _address;
+@synthesize addressLabel = _addressLabel;
 
-- (void)setBusinesses:(NSArray *)businesses 
-{
-    if(businesses != _businesses) {
-        _businesses = businesses;
-        [self.tableView reloadData];
-    }
-}
 
-- (void)setAddress:(NSString *)address
-{
-    if(address != _address) {
-        _address = address;
-        NSLog(@"Address is %@", self.address);
-    }
-}
 - (id)initWithStyle:(UITableViewStyle)style
 {
     self = [super initWithStyle:style];
@@ -56,22 +47,25 @@
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
-    // Setup location manager
-    self.locationManager = [[CLLocationManager alloc] init];
-    [self.locationManager setDelegate:self];
-    //Only applies when in foreground otherwise it is very significant changes (maybe???)
-    [self.locationManager setDesiredAccuracy:kCLLocationAccuracyBest];
     
-    // Start getting locations
-    [self.locationManager startUpdatingLocation];
 
 }
 
 - (void)viewDidUnload
 {
+    [self setAddressLabel:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+}
+- (void)viewDidAppear:(BOOL)animated
+{
+
+    [self refreshNearbyBusinesses];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -88,6 +82,7 @@
         // Get out the business
         BiTBusiness *business = [self.businesses objectAtIndex:rowNumber];
         [segue.destinationViewController setBusiness:business];
+        [segue.destinationViewController setDelegate:self];
     } else if ([segue.identifier isEqualToString:@"Show Rate"]) {
         NSIndexPath *selectedIndexPath = [self.tableView indexPathForSelectedRow];
         NSInteger rowNumber = selectedIndexPath.row;
@@ -99,42 +94,69 @@
 
 }
 
-#pragma mark Actions
-- (void)refreshNearbyBusinessesAtLat:(double)lat lon:(double)lon
+#pragma mark Accessors
+- (void)setBusinesses:(NSArray *)businesses 
 {
-    int cityId = 1;
-    int radiusM = 500;
-    
-    [BiTBusiness getNearbyAllBusinessesInCity:cityId atLat:lat lon:lon radiusM:radiusM onSuccess:^(NSString *address, NSArray *businesses) {
+    if(businesses != _businesses) {
+        _businesses = businesses;
+        [self.tableView reloadData];
+    }
+}
+
+
+- (void)setAddress:(NSString *)address
+{
+    if(address != _address) {
+        _address = address;
+        NSLog(@"Address is %@", self.address);
+        self.addressLabel.text = address;
+    }
+}
+
+#pragma mark Actions
+- (void)refreshNearbyBusinesses
+{
+    [[BiTLocationManager locationManager] locationOnSuccess:^(BiTCity *city, CLLocation *location) {
         
-        self.businesses = businesses;
-        self.address = address;
+        int radiusM = 500;
         
-    } failure:^(NSError *error) {
-        NSLog(@"Rate selector is fucked %@", error);
+        // Check how far it is from the previous location
+        if(![self lastGotLocation] || [location distanceFromLocation:[self lastGotLocation]] > 100) {
+            
+            self.businesses = nil;
+            self.address = @"Finding location...";
+            
+            [BiTBusiness getNearbyAllBusinessesInCity:city.cityId atLat:location.coordinate.latitude lon:location.coordinate.longitude radiusM:radiusM onSuccess:^(NSString *address, NSArray *businesses) {
+                
+                // save the location we fetched from
+                self.lastGotLocation = location;
+                
+                // Set the data
+                self.businesses = businesses;
+                self.address = address;
+                
+            } failure:^(NSError *error) {
+                NSLog(@"Rate selector is fucked %@", error);
+            }];
+        } else {
+
+        }
+        
+    } failure:^{
+        
     }];
 }
 - (IBAction)refreshButtonClicked:(id)sender {
-    [self.locationManager startUpdatingLocation];
+    [self refreshNearbyBusinesses];
 }
 
-#pragma mark - CLLocationDelegate Methods
-- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
-    
-    // Stop updating location
-    // Rely on the user manually refreshing to update the list of locations
-    [self.locationManager stopUpdatingLocation];
-    
-    [self refreshNearbyBusinessesAtLat:newLocation.coordinate.latitude lon:newLocation.coordinate.longitude];
+- (void)assignCategoryTableViewController:(BiTAssignCategoryTableViewController *)assignCategoryTableViewController
+                   didAddCategory:(BiTCategory *)category
+                               toBusiness:(BiTBusiness *)business
+{
+    [self.presentedViewController dismissModalViewControllerAnimated:YES];
+    [self.tableView reloadData];
 }
-
-- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
-    //    NSLog(@"Unable to start location manager. Error:%@", [error description]);
-    
-    //    [alertLabel setHidden:NO];
-    NSLog(@"Failed to get location %@", error);
-}
-
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -151,13 +173,11 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Business Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    static NSString *CellIdentifier = @"Business Distance Cell";
+    BiTNearbyBusinessCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     // Configure the cell...
-    BiTBusiness *business = [self.businesses objectAtIndex:indexPath.row];
-    cell.textLabel.text = business.businessName;
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%.0f m", (business.distance * 1000)];
+    [cell displayBusiness:[self.businesses objectAtIndex:indexPath.row]];
     
     return cell;
 }
@@ -217,15 +237,32 @@
         NSLog(@"We dont have categories, so lets assign one. Cat %@ Count %d", business.categories, business.categories.count);
         [self performSegueWithIdentifier:@"Show Assign Category" sender:self];
     }
-    
-    
-    // Navigation logic may go here. Create and push another view controller.
-    /*
-     <#DetailViewController#> *detailViewController = [[<#DetailViewController#> alloc] initWithNibName:@"<#Nib name#>" bundle:nil];
-     // ...
-     // Pass the selected object to the new view controller.
-     [self.navigationController pushViewController:detailViewController animated:YES];
-     */
 }
+
+
+#pragma mark - BiTAssignCategoryTableViewController Delegate
+- (void)assignCategoryTableViewController:(BiTAssignCategoryTableViewController *)sender assignedCategory:(BiTCategory *)category toBusiness:(BiTBusiness *)business
+{
+    NSLog(@"Category assigned to Business");
+
+    [self.presentedViewController dismissModalViewControllerAnimated:YES];
+    
+    [self performSegueWithIdentifier:@"Show Rate" sender:self];
+    
+    /* Update the tableview */
+    NSIndexPath *selectedIndexPath = [self.tableView indexPathForSelectedRow];
+    NSInteger rowNumber = selectedIndexPath.row;
+    NSMutableArray *updatedBusinesses = [self.businesses mutableCopy];
+    [updatedBusinesses replaceObjectAtIndex:rowNumber withObject:business];
+    self.businesses = [updatedBusinesses copy]; 
+    
+    [self.tableView selectRowAtIndexPath:selectedIndexPath animated:NO scrollPosition:UITableViewScrollPositionTop];
+}
+- (void)assignCategoryTableViewControllerDidNotAssignCategory:(BiTAssignCategoryTableViewController *)sender
+{
+    NSLog(@"No category assigned");
+    [self.presentedViewController dismissModalViewControllerAnimated:YES];
+}
+
 
 @end

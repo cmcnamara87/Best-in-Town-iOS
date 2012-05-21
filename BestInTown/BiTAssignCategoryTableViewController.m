@@ -8,13 +8,17 @@
 
 #import "BiTAssignCategoryTableViewController.h"
 #import "BiTCategory.h"
+#import "BiTRateSelectorTableViewController.h"
 
 @interface BiTAssignCategoryTableViewController ()
 @property (nonatomic, strong) NSArray *categories;
+@property (weak, nonatomic) IBOutlet UIButton *actionButton;
 @end
 
 @implementation BiTAssignCategoryTableViewController
+@synthesize delegate;
 @synthesize categories = _categories;
+@synthesize actionButton = _actionButton;
 @synthesize business = _business;
 
 - (id)initWithStyle:(UITableViewStyle)style
@@ -35,6 +39,7 @@
 
 - (void)viewDidUnload
 {
+    [self setActionButton:nil];
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
@@ -69,6 +74,15 @@
     } failure:^(NSError *error) {
         NSLog(@"Categories are fucked %@", error);
     }];
+}
+- (IBAction)actionButtonPressed:(id)sender {
+    NSArray *indexPathsOfSelectedRows = [self.tableView indexPathsForSelectedRows];
+    
+    if([indexPathsOfSelectedRows count]) {
+        [self.delegate assignCategoryTableViewController:self assignedCategory:nil toBusiness:self.business];
+    } else {
+        [self.delegate assignCategoryTableViewControllerDidNotAssignCategory:self];
+    }
 }
 
 #pragma mark - Table view data source
@@ -138,20 +152,29 @@
 
 #pragma mark - Table view delegate
 
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    cell.accessoryType = UITableViewCellAccessoryNone; 
+    NSLog(@"Deselecting row");
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     BiTCategory *selectedCategory = [self.categories objectAtIndex:indexPath.row];
     
+    // Give it a tick mark
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    
+    NSLog(@"Selecting");
+    cell.accessoryType = UITableViewCellAccessoryCheckmark;
+    
     // Assign that category to a table
-    [BiTCategory addBusiness:self.business.businessId toCategory:selectedCategory.categoryId onSuccess:^{
+    [BiTBusiness addBusiness:self.business.businessId toCategory:selectedCategory.categoryId onSuccess:^(BiTBusiness *business) {
         NSLog(@"Category assigned");
-        
-        [self performSegueWithIdentifier:@"Show Rate" sender:self];
     } failure:^(NSError *error) {
-        NSLog(@"Failed to Assign Category");        
+        NSLog(@"Failed to assign category");
     }];
-    
-    
 }
 
 @end

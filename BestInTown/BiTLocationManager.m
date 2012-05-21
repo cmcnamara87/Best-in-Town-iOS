@@ -10,7 +10,6 @@
 #import "BiTAppDelegate.h"
 #import "BiTCity.h"
 @interface BiTLocationManager () <CLLocationManagerDelegate>
-@property (nonatomic, strong) CLLocationManager *cllocationManager;
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
 @end
 
@@ -32,7 +31,7 @@
     return instance;
 }
 
-- (void)locationOnSuccess:(void (^)(int cityId, CLLocation *location))success 
+- (void)locationOnSuccess:(void (^)(BiTCity *city, CLLocation *location))success 
                   failure:(void (^)())failure
 {
     if(cllocationManager.location) {
@@ -40,35 +39,51 @@
         CLLocationCoordinate2D coordinate = cllocationManager.location.coordinate;
         
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        int cityId = [(NSNumber *)[defaults objectForKey:@"cityId"] intValue];
-        double cityMaxLat = [(NSNumber *)[defaults objectForKey:@"cityMaxLat"] doubleValue];
-        double cityMinLat = [(NSNumber *)[defaults objectForKey:@"cityMinLat"] doubleValue];
-        double cityMaxLon = [(NSNumber *)[defaults objectForKey:@"cityMaxLon"] doubleValue];
-        double cityMinLon = [(NSNumber *)[defaults objectForKey:@"cityMinLon"] doubleValue];
+        BiTCity *city = (BiTCity *)[defaults objectForKey:@"city"];
         
-        if (cityId && coordinate.latitude < cityMaxLat && coordinate.latitude > cityMinLat && coordinate.longitude < cityMaxLon && coordinate.longitude > cityMinLon) {
-            success(cityId, cllocationManager.location);
+        if (city && 
+            coordinate.latitude < city.maxCoordinate.coordinate.latitude && 
+            coordinate.latitude > city.minCoordinate.coordinate.latitude && 
+            coordinate.longitude < city.maxCoordinate.coordinate.longitude && 
+            coordinate.longitude > city.minCoordinate.coordinate.longitude) {
+            
+            success(city, cllocationManager.location);
         } else {
             
             // We need to get an updated city from the server
             [BiTCity getCityForLat:coordinate.latitude lon:coordinate.longitude onSuccess:^(BiTCity *city) {
                 
                 // Store it for next time in defaults
-                [defaults setObject:[NSNumber numberWithInt:city.cityId] forKey:@"userId"];
-                [defaults setObject:[NSNumber numberWithDouble:city.maxCoordinate.coordinate.latitude] forKey:@"cityMaxLat"];
-                [defaults setObject:[NSNumber numberWithDouble:city.maxCoordinate.coordinate.longitude] forKey:@"cityMaxLon"];
-                [defaults setObject:[NSNumber numberWithDouble:city.minCoordinate.coordinate.latitude] forKey:@"cityMinLat"];
-                [defaults setObject:[NSNumber numberWithDouble:city.minCoordinate.coordinate.longitude] forKey:@"cityMinLon"];
-                
+                [defaults setObject:city forKey:@"city"];
                 [defaults synchronize];
                 
-                success(city.cityId, cllocationManager.location);
+                success(city, cllocationManager.location);
+                
             } failure:^(NSError *error) {
                 failure();
             }];
         }
     } else {
         failure();
+    }
+}
+
+/**
+ Get array of past locations
+ (locations filtered for distance changes, since there might be 
+ times where it triggers a write, but its not a large distance change)
+ */
+- (NSArray *)getPastLocations
+{
+    // Get the managed object context from the delegate
+    NSManagedObjectContext * managedObjectContext = [(BiTAppDelegate *)[[UIApplication sharedApplication] delegate] managedObjectContext];
+    
+    NSFetchRequest *fetch = [[NSFetchRequest alloc] initWithEntityName:@"Location"];
+    [fetch setSortDescriptors:[NSArray arrayWithObject:[NSSortDescriptor sortDescriptorWithKey:@"timestamp" ascending:NO]]];
+    NSFetchedResultsController *fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetch managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:@"LocationCache"];
+    NSError *error;
+    if (![fetchedResultsController performFetch:&error]) {
+        NSLog(@"Failed to fetch locations: %@", error);
     }
 }
 

@@ -47,23 +47,6 @@
 }
 
 #pragma mark Class methods
-+ (void)addBusiness:(int)businessId 
-         toCategory:(int)categoryId 
-          onSuccess:(void (^)())success 
-            failure:(void (^)(NSError *error))failure
-{   
-    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys: 
-                             [NSNumber numberWithInt:businessId], @"business_id",
-                             [NSNumber numberWithInt:categoryId], @"category_id",
-                             nil];
-    
-    [[BiTApiController sharedApi] postPath:@"index.php/api/businesses_categories" parameters:params OnSuccess:^(AFHTTPRequestOperation *operation, id responseObject) 
-    {
-        success();
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        failure(error);
-    }];
-}
 
 /**
  Creates an array of BitCategory objects for an array of category data
@@ -83,12 +66,22 @@
     BiTCategory *category = [[BiTCategory alloc] init];
     category.categoryName = [categoryData objectForKey:@"name"];
     category.categoryId = [(NSNumber*)[categoryData objectForKey:@"id"] intValue];
+    
     if([categoryData objectForKey:@"image"] != [NSNull null]) {
         category.imageUrl = [[NSURL alloc] initWithString:[categoryData objectForKey:@"image"]];
     }
+    
     if([categoryData objectForKey:@"parent_id"] != [NSNull null]) {
         category.imageUrl = [[NSURL alloc] initWithString:[categoryData objectForKey:@"parent_id"]];
-    }    
+    } 
+    
+    // Business specific category data (we can add here too)
+    if([categoryData objectForKey:@"elo_score"] != [NSNull null]) {
+        category.eloScore = [(NSNumber*)[categoryData objectForKey:@"elo_score"] intValue];
+    } 
+    if([categoryData objectForKey:@"rank"] != [NSNull null]) {
+        category.eloScore = [(NSNumber*)[categoryData objectForKey:@"rank"] intValue];
+    }
     
     // Add in the subcategories (only if its there, and there is more than 1 sub-category)
     if([categoryData objectForKey:@"categories"] != [NSNull null] && [[categoryData objectForKey:@"categories"] count]) {

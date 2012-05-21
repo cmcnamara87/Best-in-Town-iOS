@@ -11,6 +11,7 @@
 #import "BiTBusiness.h"
 #import "BiTBusinessDetailViewController.h"
 #import "BiTLocationManager.h"
+#import "BiTTopTenCell.h"
 
 @interface BiTListTableViewController () 
 
@@ -48,9 +49,9 @@
         self.cityId = kBrisbaneCityId;
     }
     
-    [[BiTLocationManager locationManager] locationOnSuccess:^(int cityId, CLLocation *location) {
+    [[BiTLocationManager locationManager] locationOnSuccess:^(BiTCity *city, CLLocation *location) {
         // Get the best businesses for the category
-        [BiTBusiness getBestBusinessesForCategory:self.category.categoryId inCity:cityId onSuccess:^(NSArray *businesses) {
+        [BiTBusiness getBestBusinessesForCategory:self.category.categoryId inCity:city.cityId onSuccess:^(NSArray *businesses) {
             self.businesses = businesses;
         } failure:^(NSError *error) {
             NSLog(@"Fucked up Business List %@", error);
@@ -100,12 +101,12 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     static NSString *CellIdentifier = @"Business Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
-    // Configure the cell...
+    BiTTopTenCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+
     BiTBusiness *currentBusiness = [self.businesses objectAtIndex:indexPath.row];
-    cell.textLabel.text = [NSString stringWithFormat:@"%i. %@", (indexPath.row + 1), currentBusiness.businessName];
-    cell.detailTextLabel.text = currentBusiness.locality;
+    
+    [cell displayBusiness:currentBusiness withRank:(indexPath.row + 1)];
+
     return cell;
 }
 

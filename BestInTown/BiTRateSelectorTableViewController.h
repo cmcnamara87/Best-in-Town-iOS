@@ -7,6 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BiTAssignCategoryTableViewController.h"
+#import "BiTCategory.h"
+#import "BiTBusiness.h"
 
 @interface BiTRateSelectorTableViewController : UITableViewController
+- (void)assignCategoryTableViewController:(BiTAssignCategoryTableViewController *)assignCategoryTableViewController
+                           didAddCategory:(BiTCategory *)category
+                               toBusiness:(BiTBusiness *)business;
 @end

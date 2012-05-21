@@ -15,8 +15,7 @@
 @synthesize cityId;
 @synthesize businessName;
 @synthesize address;
-@synthesize lat;
-@synthesize lon;
+@synthesize location;
 @synthesize phone;
 @synthesize rankings;
 @synthesize imageUrl;
@@ -34,6 +33,25 @@
 
 
 #pragma mark Class Methods
+
++ (void)addBusiness:(int)businessId 
+         toCategory:(int)categoryId 
+          onSuccess:(void (^)(BiTBusiness *business))success 
+            failure:(void (^)(NSError *error))failure
+{   
+    NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys: 
+                            [NSNumber numberWithInt:businessId], @"business_id",
+                            [NSNumber numberWithInt:categoryId], @"category_id",
+                            nil];
+    
+    [[BiTApiController sharedApi] postPath:@"index.php/api/businesses_categories" parameters:params OnSuccess:^(AFHTTPRequestOperation *operation, id responseObject) 
+     {
+         success([BiTBusiness buildBusinessfromDict:responseObject]);
+     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+         failure(error);
+     }];
+}
+
 /**
  Get the best businesses in the city, for a particular category
  */
@@ -179,8 +197,11 @@
 - (void)addData:(NSDictionary *)businessData {
     self.businessId = [(NSNumber*)[businessData objectForKey:@"id"] intValue];
     self.cityId = [(NSNumber*)[businessData objectForKey:@"city_id"] intValue];
-    self.lat = [(NSNumber*)[businessData objectForKey:@"lat"] doubleValue];
-    self.lon = [(NSNumber*)[businessData objectForKey:@"lon"] doubleValue];
+    self.location = [[CLLocation alloc] initWithLatitude:[(NSNumber *)[businessData objectForKey:@"lat"] doubleValue] 
+                                               longitude:[(NSNumber *)[businessData objectForKey:@"lon"] doubleValue]];
+    
+//    self.lat = [(NSNumber*)[businessData objectForKey:@"lat"] doubleValue];
+//    self.lon = [(NSNumber*)[businessData objectForKey:@"lon"] doubleValue];
     self.modified = [businessData objectForKey:@"modified"]; 
     self.businessName = [businessData objectForKey:@"name"];    
     if([businessData objectForKey:@"phone"] != [NSNull null]) {

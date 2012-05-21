@@ -8,9 +8,15 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreLocation/CoreLocation.h>
+#import "BiTCity.h"
 
 @interface BiTLocationManager : NSObject
+// No guarantee of data
+@property (nonatomic, strong) CLLocationManager *cllocationManager;
+
 + (BiTLocationManager *)locationManager;
-- (void)locationOnSuccess:(void (^)(int cityId, CLLocation *location))success 
+
+// Guarantee of data
+- (void)locationOnSuccess:(void (^)(BiTCity *city, CLLocation *location))success 
                   failure:(void (^)())failure;
 @end

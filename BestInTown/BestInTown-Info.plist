@@ -16,6 +16,8 @@
 			<array>
 				<string>Default@2x.png</string>
 				<string>Default@2x.png</string>
+				<string>Default@2x.png</string>
+				<string>Default@2x.png</string>
 			</array>
 		</dict>
 	</dict>
@@ -46,6 +48,10 @@
 	<string>1.0</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Intro.otf</string>
+	</array>
 	<key>UIMainStoryboardFile</key>
 	<string>BiTiPhoneStoryboard</string>
 	<key>UIRequiredDeviceCapabilities</key>

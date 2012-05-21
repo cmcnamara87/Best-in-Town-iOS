@@ -1,0 +1,43 @@
+//
+//  BiTNavigationViewController.m
+//  BestInTown
+//
+//  Created by Craig McNamara on 20/05/12.
+//  Copyright (c) 2012 University of Queensland. All rights reserved.
+//
+
+#import "BiTNavigationViewController.h"
+
+@interface BiTNavigationViewController ()
+
+@end
+
+@implementation BiTNavigationViewController
+
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        // Custom initialization
+    }
+    return self;
+}
+
+- (void)viewDidLoad
+{
+    [super viewDidLoad];
+	// Do any additional setup after loading the view.
+}
+
+- (void)viewDidUnload
+{
+    [super viewDidUnload];
+    // Release any retained subviews of the main view.
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
+{
+    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+@end

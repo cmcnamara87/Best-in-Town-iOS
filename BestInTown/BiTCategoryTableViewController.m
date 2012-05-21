@@ -18,12 +18,16 @@
 @property (nonatomic, strong) CLLocationManager *locationManager;
 @property (nonatomic, strong) NSArray *nearbyBusinesses;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *nearbyButton;
+@property (weak, nonatomic) IBOutlet UILabel *cityLabel;
+@property (nonatomic, strong) NSString *address;
 @end
 
 @implementation BiTCategoryTableViewController
 @synthesize locationManager = _locationManager;
 @synthesize nearbyBusinesses = _nearbyBusinesses;
+@synthesize address = _address;
 @synthesize nearbyButton = _nearbyButton;
+@synthesize cityLabel = _cityLabel;
 @synthesize categories = _categories;
 @synthesize isSubcategory = _isSubcategory;
 @synthesize category = _category;
@@ -34,35 +38,20 @@
     [super viewDidLoad];
     
     // Get the categories (if this isnt a sub-category...)
-    if (!self.isSubcategory) {
-        [self refreshCategories];
-    }
+    self.tableView.backgroundColor = [UIColor whiteColor];
+
 }
 
 - (void)viewDidUnload
 {
     [self setNearbyButton:nil];
+    [self setCityLabel:nil];
     [super viewDidUnload];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
-    [[BiTLocationManager locationManager] locationOnSuccess:^(int cityId, CLLocation *location) {
-        
-        
-        [BiTBusiness getNearbyBestBusinessesInCity:cityId 
-                                             atLat:location.coordinate.latitude 
-                                               lon:location.coordinate.longitude 
-                                           radiusM:2000 underCategory:[[self category] categoryId] 
-                                         onSuccess:^(NSString *address, NSArray *businesses) {
-                                             self.nearbyBusinesses = businesses;
-                                         } failure:^(NSError *error) {
-                                             NSLog(@"Failed to get nearby businesses %@", error);
-                                         }];
-        
-    } failure:^{
-        NSLog(@"Failed to get city/lat lon");
-    }];
+    [self refreshCategories];
 }
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
@@ -101,6 +90,7 @@
     } else if ([segue.identifier isEqualToString:@"Show Nearby"]) {
         [[segue destinationViewController] setCategory:[self category]];
         [[segue destinationViewController] setBusinesses:[self nearbyBusinesses]];
+        [[segue destinationViewController] setAddress:[self address]];
     }
 }
 
@@ -137,10 +127,41 @@
 #pragma mark Actions
 - (void)refreshCategories
 {
-    [BiTCategory getCategoriesOnSuccess:^(NSArray *categories) {
-        self.categories = categories;
-    } failure:^(NSError *error) {
-        NSLog(@"Categories are fucked %@", error);
+    if (!self.isSubcategory) {
+            
+        [BiTCategory getCategoriesOnSuccess:^(NSArray *categories) {
+            self.categories = categories;
+            
+            [self refreshNearbyBusinesses];
+            
+        } failure:^(NSError *error) {
+            NSLog(@"Categories are fucked %@", error);
+        }];
+    } else {
+        [self refreshNearbyBusinesses];
+    }
+}
+
+- (void)refreshNearbyBusinesses
+{
+    [[BiTLocationManager locationManager] locationOnSuccess:^(BiTCity *city, CLLocation *location) {
+        
+        // TODO: make it show the actual country for the nearby 
+        self.cityLabel.text = [NSString stringWithFormat:@"%@, %@", city.cityName, @"Australia"];
+        
+        [BiTBusiness getNearbyBestBusinessesInCity:city.cityId 
+                                             atLat:location.coordinate.latitude 
+                                               lon:location.coordinate.longitude 
+                                           radiusM:2000 underCategory:[[self category] categoryId] 
+                                         onSuccess:^(NSString *address, NSArray *businesses) {
+                                             self.nearbyBusinesses = businesses;
+                                             self.address = address;
+                                         } failure:^(NSError *error) {
+                                             NSLog(@"Failed to get nearby businesses %@", error);
+                                         }];
+        
+    } failure:^{
+        NSLog(@"Failed to get city/lat lon");
     }];
 }
 
@@ -187,47 +208,12 @@
 }
 
 
-
-/*
-// Override to support conditional editing of the table view.
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return YES;
-}
-*/
-
-/*
-// Override to support editing the table view.
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        // Delete the row from the data source
-        [tableView deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationFade];
-    }   
-    else if (editingStyle == UITableViewCellEditingStyleInsert) {
-        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-    }   
-}
-*/
-
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
 #pragma mark - Table view delegate
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 60.0;
+}
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {

@@ -42,67 +42,36 @@
     // e.g. self.myOutlet = nil;
 }
 
-- (void)viewWillDisappear:(BOOL)animated
-{
-    NSLog(@"Showing root view controller for rating table view");
-    [self.navigationController popToRootViewControllerAnimated:NO];
-}
-
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    NSLog(@"Seguing with identifer %@", segue.identifier);
+}
 #pragma mark Actions
 - (IBAction)saveButton:(id)sender {
     NSLog(@"Save Rating");
     
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    int userId = [(NSNumber *)[defaults objectForKey:@"userId"] intValue]; 
+    
     // Create visit
-    [BiTVisit addVisitForBusiness:self.business.businessId user:1 onSuccess:^(BiTVisit *visit) {
+    [BiTVisit addVisitForBusiness:self.business.businessId user:userId onSuccess:^(BiTVisit *visit) {
         NSLog(@"Visit added");  
         
-        // Add match results
-        // lets find where the current business is after they have finished rating
-        int selectedBusinessIndex = 0;
-        for(BiTBusiness *currentBusiness in self.businesses) {
-            if(currentBusiness.businessId = self.business.businessId) {
-                break;
-            }
-            selectedBusinessIndex++;
+        if(self.businesses.count > 1) {        
+            [BiTMatch addRankingResult:self.businesses forBusinesses:self.business forVisit:visit onSuccess:^{
+                NSLog(@"Businesses ranked");
+                [self performSegueWithIdentifier:@"Show Result" sender:self];
+            } failure:^(NSError *error) {
+                NSLog(@"Failed to rank businesses %@", error);
+            }];
+        } else {
+            [self performSegueWithIdentifier:@"Show Result" sender:self];
         }
-        
-        for(int i = 0; i < self.businesses.count; i++) {
-            BiTBusiness *pastBusiness = [self.businesses objectAtIndex:i];
-            
-            if(i == selectedBusinessIndex) continue;
-            
-            if(selectedBusinessIndex < i) {
-                // the selected business won
-                [BiTMatch addMatchForWinningBusiness:self.business.businessId losingBusiness:pastBusiness.businessId forVisit:visit.visitId onSuccess:^{
-                   
-                    NSLog(@"Match added");
-                } failure:^(NSError *error) {
-                    NSLog(@"Failed to add match %@", error);
-                }];
-            } else if(selectedBusinessIndex > i) {
-                // the selected business won
-                [BiTMatch addMatchForWinningBusiness:pastBusiness.businessId losingBusiness:self.business.businessId forVisit:visit.visitId onSuccess:^{
-                    
-                    NSLog(@"Match added");
-                } failure:^(NSError *error) {
-                    NSLog(@"Failed to add match %@", error);
-                }];
-            }
-        }
-//        [self.navigationController setViewControllers:[NSArray array]];
-        
-//        UINavigationController * navigationController = [self.tabBarController.viewControllers objectAtIndex:1];
-//        
-//        [navigationController pushViewController:detailViewController animated:NO];
-//        
-        self.tabBarController.selectedViewController = [self.tabBarController.viewControllers objectAtIndex:1];
-        
-
   
     } failure:^(NSError *error) {
         NSLog(@"Failed to log visit %@", error);
@@ -121,18 +90,22 @@
         
         business.selectedBusiness = YES;
         
+        
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        int userId = [(NSNumber *)[defaults objectForKey:@"userId"] intValue]; 
+        
         // Get the other businesses to rate
-        [BiTBusiness getBusinessesToRateForUser:1 business:self.business.businessId onSuccess:^(NSArray *businesses) {
-            NSLog(@"GOT BUSINESSES TO RATE %@", businesses);
-            
+        [BiTBusiness getBusinessesToRateForUser:userId business:self.business.businessId onSuccess:^(NSArray *businesses) {
+            NSLog(@"GOT BUSINESSES TO RATE %@ %d", businesses, [businesses count]);
+ 
             // Add the current business into the list
+            
             NSMutableArray *mutableBusinesses = businesses.mutableCopy;
-            if(mutableBusinesses.count == 0) {
-                [mutableBusinesses insertObject:self.business atIndex:0];
+            if(businesses.count == 0) {
+                [mutableBusinesses insertObject:self.business atIndex:0 ]; 
             } else {
                 [mutableBusinesses insertObject:self.business atIndex:1]; 
             }
-            
             // Store the businesses
             self.businesses = mutableBusinesses.copy;
             
@@ -146,18 +119,9 @@
     if(businesses != _businesses) {
         _businesses = businesses;
         
-        // if we only have one business (no previous similar visits)
-        // we will just submit the visit automatically)
-        if(self.businesses.count == 1) {
-            [BiTVisit addVisitForBusiness:self.business.businessId user:1 onSuccess:^(BiTVisit *visit) {
-                NSLog(@"Visit added");                
-            } failure:^(NSError *error) {
-                NSLog(@"Failed to log visit %@", error);
-            }];
-        } else {
-            [self.tableView reloadData];  
-            [self.tableView setEditing:YES];
-        }
+        [self.tableView reloadData];  
+        [self.tableView setEditing:YES];
+
     }
 }
 

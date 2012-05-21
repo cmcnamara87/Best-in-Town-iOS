@@ -29,6 +29,10 @@
     return self;
 }
 
+- (IBAction)logo:(id)sender {
+
+
+}
 
 - (void)viewDidLoad
 {
@@ -43,8 +47,9 @@
     [BiTLocationManager locationManager];
     
     self.facebook = [(BiTAppDelegate *)[[UIApplication sharedApplication] delegate] facebook];
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+
     
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     if ([defaults objectForKey:@"FBAccessTokenKey"] 
         && [defaults objectForKey:@"FBExpirationDateKey"]) {
         self.facebook.accessToken = [defaults objectForKey:@"FBAccessTokenKey"];
@@ -53,7 +58,7 @@
         NSLog(@"Acess token %@", self.facebook.accessToken);
         NSLog(@"Expiry date %@", self.facebook.expirationDate);
     }
-
+    
     if (![self.facebook isSessionValid]) {
         // Show the login controller
         [self performSegueWithIdentifier:@"Show Login" sender:self];
@@ -73,8 +78,9 @@
             // dont have the user stored, so get it from facebook
             [self performSegueWithIdentifier:@"Show Login" sender:self];
         }
-
+        
     }
+
 }
 
 - (void)viewDidUnload

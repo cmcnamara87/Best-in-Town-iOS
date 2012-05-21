@@ -9,12 +9,15 @@
 #import "BiTNearbyViewController.h"
 #import "BiTBusiness.h"
 #import "BiTBusinessDetailViewController.h"
+#import "BiTLocationManager.h"
+#import "BiTNearbyBusinessCell.h"
 #import <CoreLocation/CoreLocation.h>
 
 @interface BiTNearbyViewController () <CLLocationManagerDelegate>
 @property (nonatomic, strong) CLLocationManager *locationManager;
 // Lookup of users current address based on lat/lon
 @property (nonatomic, strong) NSString* address;
+@property (weak, nonatomic) IBOutlet UILabel *addressLabel;
 @end
 
 @implementation BiTNearbyViewController
@@ -22,6 +25,7 @@
 @synthesize locationManager;
 @synthesize businesses = _businesses;
 @synthesize address = _address;
+@synthesize addressLabel = _addressLabel;
 
 - (id)initWithStyle:(UITableViewStyle)style
 {
@@ -50,6 +54,7 @@
 
 - (void)viewDidUnload
 {
+    [self setAddressLabel:nil];
     [super viewDidUnload];
 }
 
@@ -71,6 +76,7 @@
     if(_address != address) {
         _address = address;
         // TODO: set the address to display
+        self.addressLabel.text = address;
     }
 }
 - (void)setBusinesses:(NSArray *)businesses {
@@ -80,6 +86,28 @@
     }
 }
 
+#pragma mark Actions
+- (void)refreshNearbyBusinesses
+{
+    [[BiTLocationManager locationManager] locationOnSuccess:^(BiTCity *city, CLLocation *location) {
+        [BiTBusiness getNearbyBestBusinessesInCity:city.cityId 
+                                             atLat:location.coordinate.latitude 
+                                               lon:location.coordinate.longitude 
+                                           radiusM:2000 
+                                     underCategory:[[self category] categoryId] 
+         onSuccess:^(NSString *address, NSArray *businesses) {
+             
+             self.businesses = businesses;
+             self.addressLabel.text = address;
+             
+         } failure:^(NSError *error) {
+             NSLog(@"nearby is fucked %@", error);
+         }];
+    } failure:^{
+        NSLog(@"nearby couldnt get location");
+    }];
+}
+
 #pragma mark - CLLocationDelegate Methods
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
     
@@ -87,21 +115,7 @@
     // Rely on the user manually refreshing to update the list of locations
     [self.locationManager stopUpdatingLocation];
     
-    int city = 1;
     
-    [BiTBusiness getNearbyBestBusinessesInCity:city 
-                                         atLat:newLocation.coordinate.latitude 
-                                           lon:newLocation.coordinate.longitude 
-                                       radiusM:2000 
-                                 underCategory:[[self category] categoryId] 
-                                     onSuccess:^(NSString *address, NSArray *businesses) {
-        
-        self.businesses = businesses;
-        self.address = address;
-        
-    } failure:^(NSError *error) {
-        NSLog(@"nearby is fucked %@", error);
-    }];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
@@ -120,14 +134,11 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Business Cell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    static NSString *CellIdentifier = @"Business Distance Cell";
+    BiTNearbyBusinessCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
-    // Configure the cell...
-    // Get out the current business
-    BiTBusiness *business = [self.businesses objectAtIndex:indexPath.row];
-    cell.textLabel.text = business.businessName;
-    cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ - %f.1KM", business.locality, business.distance];
+    [cell displayBusiness:[self.businesses objectAtIndex:indexPath.row]];
+
     return cell;
 }
 
